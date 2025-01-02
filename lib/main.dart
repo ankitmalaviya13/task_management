@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/core/color/color.dart';
-import 'package:task_management/screens/login_Screen.dart';
+import 'package:task_management/screens/bottomBar_Screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,14 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueGrey,
       ),
       themeMode: ThemeMode.system,
-      // theme: lightTheme,
-      // darkTheme: darkTheme,
-      // themeMode: ThemeMode.system,
-      // // theme: ThemeData(
-      // //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      // //   useMaterial3: true,
-      // // ),
-      home: const LoginScreen(),
+      home: const BottomBarScreen(),
     );
   }
 
@@ -56,8 +49,6 @@ class MyApp extends StatelessWidget {
     textTheme: const TextTheme(
       bodySmall: TextStyle(color: AppColor.darkTextColor),
       bodyMedium: TextStyle(color: AppColor.greyText),
-      // bodyText1: TextStyle(color: AppColor.darkTextColor),
-      // bodyText2: TextStyle(color: AppColor.greyText),
     ),
     appBarTheme: const AppBarTheme(
       color: AppColor.darkPrimaryColor,
