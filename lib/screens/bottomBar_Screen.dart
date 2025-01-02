@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/core/color/color.dart';
+import 'package:task_management/screens/addTeam_Member.dart';
 import 'package:task_management/screens/home_Screen.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
 import 'package:task_management/screens/profile_creen.dart';
@@ -167,7 +168,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                   },
                 ),
               const SizedBox(height: 20),
-              const CommonButtonColor(
+              CommonButtonColor(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddTeamMember(),
+                      ));
+                },
                 label: "Add Member",
                 buttonBorderColor: AppColor.primaryColor,
                 labelColor: AppColor.primaryColor,
