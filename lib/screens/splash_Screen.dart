@@ -1,9 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/core/color/color.dart';
-import 'package:task_management/core/constant/Assetimages.dart';
+import 'package:provider/provider.dart';
 
-class Splashscreen extends StatelessWidget {
+import '../core/color/color.dart';
+import '../core/constant/Assetimages.dart';
+import '../providers/splash_provider.dart';
+import 'bottomBar_Screen.dart';
+import 'login_Screen.dart';
+
+class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
+
+  @override
+  State<Splashscreen> createState() => _SplashscreenState();
+}
+
+class _SplashscreenState extends State<Splashscreen> {
+  @override
+  void initState() {
+    final splashProvider = Provider.of<SplashProvider>(context, listen: false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await splashProvider.initializeApp();
+
+      if (splashProvider.isAuthenticated) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const BottomBarScreen()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

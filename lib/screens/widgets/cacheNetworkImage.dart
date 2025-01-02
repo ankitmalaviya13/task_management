@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../core/constant/Assetimages.dart';
+
 Container cachedNetworkImage({
   height,
   width,
@@ -28,6 +30,10 @@ Container cachedNetworkImage({
           baseColor: Colors.grey.shade300,
           highlightColor: Colors.grey.shade100,
           child: Container(
+            decoration: BoxDecoration(
+              // color: Colors.transparent,
+              borderRadius: BorderRadius.circular(circular),
+            ),
             child: /* image != null
                 ? Center(
                     child: customIndicator(),
@@ -41,13 +47,9 @@ Container cachedNetworkImage({
                 borderRadius: BorderRadius.circular(circular),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(placeholder ?? ""),
+                  image: AssetImage(placeholder ?? AppAssetImage.logo),
                 ),
               ),
-            ),
-            decoration: BoxDecoration(
-              // color: Colors.transparent,
-              borderRadius: BorderRadius.circular(circular),
             ),
           ),
         ),
@@ -58,7 +60,7 @@ Container cachedNetworkImage({
             borderRadius: BorderRadius.circular(circular),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(placeholder ?? ""),
+              image: AssetImage(placeholder ?? AppAssetImage.logo),
             ),
           ),
         ),
