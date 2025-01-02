@@ -12,6 +12,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -99,8 +100,8 @@ class RegisterScreen extends StatelessWidget {
                     child: RichText(
                       text: TextSpan(
                         text: "I agree to the",
-                        style: const TextStyle(
-                            color: AppColor.black,
+                        style: TextStyle(
+                            color: (isDarkMode ? Colors.white : Colors.black),
                             overflow: TextOverflow.ellipsis,
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
@@ -135,10 +136,10 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: "Already have an account ? ",
                       style: TextStyle(
-                        color: AppColor.black,
+                        color: (isDarkMode ? Colors.white : Colors.black),
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),

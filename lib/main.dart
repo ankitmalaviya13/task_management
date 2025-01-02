@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:task_management/providers/auth_provider.dart';
-import 'package:task_management/providers/splash_provider.dart';
-import 'package:task_management/screens/splash_Screen.dart';
+import 'package:task_management/screens/bottomBar_Screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Splashscreen(),
       ),
+      home: BottomBarScreen(),
     );
   }
 }
