@@ -4,6 +4,7 @@ import 'package:task_management/screens/addTeam_Member.dart';
 import 'package:task_management/screens/home_Screen.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
 import 'package:task_management/screens/profile_creen.dart';
+import 'package:task_management/screens/schedule_Screen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -20,7 +21,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MyProjectScreen(),
-    const HomeScreen(),
+    const ScheduleScreen(),
     const ProfileScreen(),
   ];
 
@@ -131,6 +132,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                 hintText: "Project Name",
                 hintTextColor: AppColor.black,
                 borderColor: AppColor.greyText,
+                fillColor: AppColor.transparent,
               ),
               const SizedBox(height: 20),
               if (_isDropdownVisible) // Conditionally render dropdown

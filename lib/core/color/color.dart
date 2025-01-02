@@ -11,4 +11,5 @@ class AppColor {
   static const Color borderColor = Color(0xffE2E2E2);
   static const Color darkGrey = Color(0xff767676);
   static const Color searchColor = Color(0XffFFEBEBEB);
+  static const Color transparent = Colors.transparent;
 }
