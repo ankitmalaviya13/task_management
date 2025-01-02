@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:task_management/screens/myProject_Screen.dart';
 import 'package:task_management/screens/notification_screen.dart';
+import 'package:task_management/screens/today_Task.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield.dart';
 
@@ -73,18 +75,27 @@ class HomeScreen extends StatelessWidget {
               onChanged: (v) {},
             ),
             const SizedBox(height: 25),
-            const Row(
+            Row(
               children: [
-                CommonText(
+                const CommonText(
                   text: "My Projects",
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
                 ),
-                Spacer(),
-                CommonText(
-                  text: "View All",
-                  fontSize: 17,
-                  color: AppColor.primaryColor,
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyProjectScreen(),
+                        ));
+                  },
+                  child: const CommonText(
+                    text: "View All",
+                    fontSize: 17,
+                    color: AppColor.primaryColor,
+                  ),
                 ),
               ],
             ),
@@ -162,18 +173,27 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               children: [
-                CommonText(
+                const CommonText(
                   text: "Today's Task",
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
                 ),
-                Spacer(),
-                CommonText(
-                  text: "View All",
-                  fontSize: 17,
-                  color: AppColor.primaryColor,
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TodayTask(),
+                        ));
+                  },
+                  child: const CommonText(
+                    text: "View All",
+                    fontSize: 17,
+                    color: AppColor.primaryColor,
+                  ),
                 ),
               ],
             ),
@@ -211,7 +231,7 @@ class HomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              // Spacer(),
+                              Spacer(),
                               Icon(
                                 Icons.more_vert,
                                 color: AppColor.black,
