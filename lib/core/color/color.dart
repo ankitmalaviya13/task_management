@@ -12,4 +12,11 @@ class AppColor {
   static const Color darkGrey = Color(0xff767676);
   static const Color searchColor = Color(0XffFFEBEBEB);
   static const Color transparent = Colors.transparent;
+
+  // Dark mode colors
+  static const Color darkPrimaryColor = Color(0xff1E4C9D);
+  static const Color darkTextColor = Color(0xff8C8C8C);
+  static const Color darkBgColor = Color(0xff121212);
+  static const Color darkButtonWhite = Color(0xff3A3A3A);
+  static const Color darkBorderColor = Color(0xff3C3C3C);
 }
