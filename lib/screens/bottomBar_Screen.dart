@@ -33,6 +33,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    debugPrint("Dark mode active: $isDarkMode");
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
@@ -43,14 +45,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             IconButton(
               icon: Icon(
                 Icons.home,
-                color: _selectedIndex == 0 ? AppColor.primaryColor : Colors.black,
+                color: _selectedIndex == 0 ? AppColor.primaryColor : (isDarkMode ? Colors.white : Colors.black),
               ),
               onPressed: () => _onItemTapped(0),
             ),
             IconButton(
               icon: Icon(
                 Icons.file_copy_rounded,
-                color: _selectedIndex == 1 ? AppColor.primaryColor : Colors.black,
+                color: _selectedIndex == 1 ? AppColor.primaryColor : (isDarkMode ? Colors.white : Colors.black),
               ),
               onPressed: () => _onItemTapped(1),
             ),
@@ -58,14 +60,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             IconButton(
               icon: Icon(
                 Icons.calendar_month_sharp,
-                color: _selectedIndex == 2 ? AppColor.primaryColor : Colors.black,
+                color: _selectedIndex == 2 ? AppColor.primaryColor : (isDarkMode ? Colors.white : Colors.black),
               ),
               onPressed: () => _onItemTapped(2),
             ),
             IconButton(
               icon: Icon(
                 Icons.account_circle,
-                color: _selectedIndex == 3 ? AppColor.primaryColor : Colors.black,
+                color: _selectedIndex == 3 ? AppColor.primaryColor : (isDarkMode ? Colors.white : Colors.black),
               ),
               onPressed: () => _onItemTapped(3),
             ),
