@@ -28,7 +28,7 @@ class _SplashscreenState extends State<Splashscreen> {
         );
       } else {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          MaterialPageRoute(builder: (context) => LoginScreen()),
         );
       }
     });
@@ -41,18 +41,14 @@ class _SplashscreenState extends State<Splashscreen> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: AppColor.primaryColor,
-            height: screenHeight,
-            width: screenWidth,
-            child: Image.asset(
-              AppAssetImage.logo,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ],
+      body: Container(
+        color: AppColor.primaryColor,
+        height: screenHeight,
+        width: screenWidth,
+        child: Image.asset(
+          AppAssetImage.logo,
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }

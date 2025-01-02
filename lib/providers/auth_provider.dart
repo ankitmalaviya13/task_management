@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 
-class AuthProvider with ChangeNotifier {
-  String _authToken = '';
+abstract class AuthProvider with ChangeNotifier {
+  login(String username, String password) {}
+  signup(String username, String password) {}
+}
 
-  String get authToken => _authToken;
+class LoginProvider extends AuthProvider {
+  bool _obsecure = true;
+  bool get obsecure => _obsecure;
 
-  Future<void> login(String username, String password) async {
-    // Simulate API call
-    await Future.delayed(Duration(seconds: 2));
-    _authToken = 'dummyToken';
-    notifyListeners();
+  void togglePasswordVisibility() {
+    _obsecure = !_obsecure;
+    notifyListeners(); // Notify listeners to rebuild the widgets
+  }
+}
+
+class SignUpProvider extends AuthProvider {
+  bool _obsecure = true;
+  bool _confirmpasswordobsecure = true;
+  bool get obsecure => _obsecure;
+  bool get confirmpasswordobsecure => _confirmpasswordobsecure;
+
+  void togglePasswordVisibility() {
+    _obsecure = !_obsecure;
+    notifyListeners(); // Notify listeners to rebuild the widgets
   }
 
-  Future<void> signup(String username, String password) async {
-    // Simulate API call
-    await Future.delayed(Duration(seconds: 2));
-    _authToken = 'dummyToken';
-    notifyListeners();
-  }
-
-  Future<void> resetPassword(String newPassword) async {
-    // Simulate API call
-    await Future.delayed(Duration(seconds: 2));
-    notifyListeners();
+  void toggleConfirmPasswordVisibility() {
+    _confirmpasswordobsecure = !_confirmpasswordobsecure;
+    notifyListeners(); // Notify listeners to rebuild the widgets
   }
 }

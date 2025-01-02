@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/core/color/color.dart';
 import 'package:task_management/screens/bottomBar_Screen.dart';
 import 'package:task_management/screens/forgotPassword_Screen.dart';
@@ -7,8 +8,22 @@ import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
+import '../providers/auth_provider.dart';
+
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    print("Gdfgdfgf");
+    return ChangeNotifierProvider.value(
+      value: LoginProvider(),
+      child: LoginWidget(),
+    );
+  }
+}
+
+class LoginWidget extends StatelessWidget {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +66,27 @@ class LoginScreen extends StatelessWidget {
                 color: AppColor.textColor,
               ),
               const SizedBox(height: 30),
-              const CommonTextFieldBorder(
+              CommonTextFieldBorder(
+                con: _emailController,
                 hintText: "Email Address",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 20),
-              const CommonTextFieldBorder(
-                hintText: "Password",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-                suffix: Icon(Icons.remove_red_eye_sharp),
-              ),
+              Consumer<LoginProvider>(builder: (context, authProvider, _) {
+                return CommonTextFieldBorder(
+                  con: _passwordController,
+                  hintText: "Password",
+                  obscureText: authProvider.obsecure,
+                  hintTextColor: AppColor.primaryColor,
+                  borderColor: AppColor.primaryColor,
+                  suffix: IconButton(
+                      onPressed: () {
+                        authProvider.togglePasswordVisibility();
+                      },
+                      icon: Icon(Icons.remove_red_eye_sharp)),
+                );
+              }),
               const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
