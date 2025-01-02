@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/core/color/color.dart';
-import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/login_Screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       // //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       // //   useMaterial3: true,
       // // ),
-      home: const BottomBarScreen(),
+      home: const LoginScreen(),
     );
   }
 

@@ -34,7 +34,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    debugPrint("Dark mode active: $isDarkMode");
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomAppBar(

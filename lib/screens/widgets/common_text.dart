@@ -28,7 +28,6 @@ class CommonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    debugPrint("Dark mode active: $isDarkMode");
     return Text(
       text ?? "",
       maxLines: maxlines,

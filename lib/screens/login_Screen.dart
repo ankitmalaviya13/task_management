@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -101,10 +102,10 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: "Didn't have account ? ",
                       style: TextStyle(
-                        color: AppColor.black,
+                        color: (isDarkMode ? Colors.white : Colors.black),
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
