@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_management/core/color/color.dart';
 import 'package:task_management/screens/home_Screen.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
+import 'package:task_management/screens/profile_creen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -19,7 +20,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     const HomeScreen(),
     const MyProjectScreen(),
     const HomeScreen(),
-    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
