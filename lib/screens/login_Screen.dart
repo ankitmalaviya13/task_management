@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/core/color/color.dart';
-import 'package:task_management/screens/forgotPasswordScreen.dart';
-import 'package:task_management/screens/registerScreen.dart';
+import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/forgotPassword_Screen.dart';
+import 'package:task_management/screens/register_Screen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -86,7 +87,13 @@ class LoginScreen extends StatelessWidget {
                 label: "Login",
                 labelColor: AppColor.white,
                 labelSize: 17,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomBarScreen(),
+                      ));
+                },
               ),
               const Spacer(),
               Row(

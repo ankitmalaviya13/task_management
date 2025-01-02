@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/screens/verifyOtp.dart';
+import 'package:task_management/core/constant/Assetimages.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
 import '../core/color/color.dart';
-import '../core/constant/Assetimages.dart';
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({super.key});
+class ResetPassword extends StatelessWidget {
+  const ResetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +17,17 @@ class ForgotPassword extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
                 child: const Icon(Icons.arrow_back_ios_new_rounded)),
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
             const Row(
               children: [
                 CommonText(
-                  text: "Forgot password",
+                  text: "Enter New Password",
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
                 ),
@@ -36,7 +35,7 @@ class ForgotPassword extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const CommonText(
-              text: "select which contact details should we use to reset your password.",
+              text: "Please enter your new password",
               color: AppColor.textColor,
             ),
             const SizedBox(height: 30),
@@ -47,22 +46,24 @@ class ForgotPassword extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const CommonTextFieldBorder(
-              hintText: "Email Address",
+              hintText: "Enter New Password",
               hintTextColor: AppColor.primaryColor,
               borderColor: AppColor.primaryColor,
+              suffix: Icon(Icons.remove_red_eye_sharp),
+            ),
+            const SizedBox(height: 20),
+            const CommonTextFieldBorder(
+              hintText: "Re-Enter Password",
+              hintTextColor: AppColor.primaryColor,
+              borderColor: AppColor.primaryColor,
+              suffix: Icon(Icons.remove_red_eye_sharp),
             ),
             const SizedBox(height: 20),
             CommonButton(
-              label: "Continue",
+              label: "Update Password",
               labelColor: AppColor.white,
               labelSize: 17,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VerifyOtp(),
-                    ));
-              },
+              onPressed: () {},
             ),
           ],
         ),

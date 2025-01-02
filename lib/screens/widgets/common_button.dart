@@ -157,7 +157,7 @@ class CommonButtonColor extends StatelessWidget {
           //     AppColor.secondaryColor,
           //   ],
           // ),
-          borderRadius: BorderRadius.circular(buttonRadius ?? 15),
+          borderRadius: BorderRadius.circular(buttonRadius ?? 4),
           border: Border.all(
             width: 1.0,
             color: buttonBorderColor ?? Colors.transparent,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_management/screens/verifyPassword.dart';
+import 'package:task_management/screens/reset_Password.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 
@@ -91,7 +91,7 @@ class VerifyOtp extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const NewPassword(),
+                      builder: (context) => const ResetPassword(),
                     ));
               },
             ),
