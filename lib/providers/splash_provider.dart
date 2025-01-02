@@ -21,7 +21,7 @@ class SplashProvider with ChangeNotifier {
     if (token != null) {
       _isAuthenticated = true;
     } else {
-      _isAuthenticated = false;
+      _isAuthenticated = true;
     }
     _isLoading = false;
     notifyListeners();
