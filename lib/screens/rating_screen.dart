@@ -40,7 +40,7 @@ class _RatingScreenState extends State<RatingScreen> {
             children: [
               const SizedBox(height: 30),
               const CommonText(
-                text: "Change Password",
+                text: "Rate Us",
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
               ),
@@ -57,7 +57,7 @@ class _RatingScreenState extends State<RatingScreen> {
                     },
                     icon: Icon(
                       Icons.star,
-                      color: index < _rating ? Colors.amber : Colors.grey,
+                      color: index < _rating ? AppColor.primaryColor : Colors.grey,
                       size: 32,
                     ),
                   );
