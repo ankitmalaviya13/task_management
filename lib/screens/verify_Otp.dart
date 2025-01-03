@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_management/screens/reset_Password.dart';
+import 'package:task_management/screens/controllers/login_signUp_controller.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 
 import '../core/color/color.dart';
 import '../core/constant/Assetimages.dart';
 
-class VerifyOtp extends StatelessWidget {
+class VerifyOtp extends StatefulWidget {
   const VerifyOtp({super.key});
 
+  @override
+  State<VerifyOtp> createState() => _VerifyOtpState();
+}
+
+class _VerifyOtpState extends State<VerifyOtp> {
+  final controller = Get.put<LoginSignupController>(LoginSignupController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +55,7 @@ class VerifyOtp extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             PinCodeTextField(
+              controller: controller.otpController,
               appContext: context,
               length: 4,
               keyboardType: TextInputType.number,
@@ -88,11 +96,7 @@ class VerifyOtp extends StatelessWidget {
               labelColor: AppColor.white,
               labelSize: 17,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ResetPassword(),
-                    ));
+                controller.verifyOtp();
               },
             ),
           ],

@@ -78,24 +78,25 @@ class LoginSignupApi {
   //   }
   // }
   //
-  // Future<Response> verifyOtp({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
-  //   try {
-  //     final Response response = await _apiService.post(
-  //       AppUrl.verifyOtp,
-  //       data: data,
-  //       options: Options(headers: headers),
-  //     );
-  //     return response;
-  //   } on DioException catch (e) {
-  //     Toasty.showtoast(ApiException.fromDioError(e).message.toString());
-  //     Response errorResponse = Response(
-  //       requestOptions: RequestOptions(),
-  //       statusMessage: e.response?.statusCode == 429 ? "" : null,
-  //       statusCode: e.response?.statusCode ?? 0,
-  //     );
-  //     return errorResponse;
-  //   }
-  // }
+  Future<Response> verifyOtp({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await _apiService.post(
+        AppUrl.verifyOtp,
+        data: data,
+        options: Options(headers: headers),
+      );
+      return response;
+    } on DioException catch (e) {
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
   //
   // Future<Response> resetPassword({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
   //   try {
