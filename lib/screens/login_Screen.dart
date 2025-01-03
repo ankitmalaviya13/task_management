@@ -79,6 +79,7 @@ class LoginWidget extends StatelessWidget {
                 const SizedBox(height: 20),
                 Consumer<PasswordVisibilityProvider>(
                   builder: (context, passwordVisibilityProvider, _) {
+                    print("GGHDKJFHGDFK");
                     return CommonTextFieldBorder(
                       con: _passwordController,
                       hintText: "Password",
@@ -164,6 +165,7 @@ class LoginWidget extends StatelessWidget {
           ),
           Consumer<LoginProvider>(
             builder: (context, authProvider, _) {
+              print("loading");
               return authProvider.isLoading ? customIndicator() : SizedBox();
             },
           ),
