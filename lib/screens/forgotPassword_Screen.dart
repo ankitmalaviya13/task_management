@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/screens/verify_Otp.dart';
+import 'package:task_management/screens/verify_otp_view.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -60,7 +60,7 @@ class ForgotPassword extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => VerifyOtp(),
+                      builder: (context) => VerifyOtpView(),
                     ));
               },
             ),

@@ -117,29 +117,30 @@ class LoginSignupApi {
   //   }
   // }
   //
-  // Future<Response> logout({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
-  //   try {
-  //     final Response response = await _apiService.get(
-  //       AppUrl.logout,
-  //       options: Options(headers: headers),
-  //     );
-  //     print(response);
-  //     print("Fdsfhsdfjkhsfkd");
-  //     return response;
-  //   } on DioException catch (e) {
-  //     print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
-  //     print(e.toString());
-  //     print(e.response.toString());
-  //     box.erase();
-  //     Toasty.showtoast(ApiException.fromDioError(e).message.toString());
-  //     Response errorResponse = Response(
-  //       requestOptions: RequestOptions(),
-  //       statusMessage: e.response?.statusCode == 429 ? "" : null,
-  //       statusCode: e.response?.statusCode ?? 0,
-  //     );
-  //     return errorResponse;
-  //   }
-  // }
+  Future<Response> logout({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await _apiService.get(
+        AppUrl.logOut,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+      box.erase();
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
   //
   Future<Response> rateUs({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
     try {

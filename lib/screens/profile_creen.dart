@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management/screens/controllers/bottomBar_controller.dart';
+import 'package:task_management/screens/login.dart';
 import 'package:task_management/screens/rating_screen.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
@@ -7,7 +10,6 @@ import 'package:task_management/screens/widgets/logout_popup.dart';
 
 import '../core/color/color.dart';
 import 'change_password.dart';
-import 'login_Screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -17,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final Controller = Get.put<BottomBarController>(BottomBarController());
   List prfileMenu = [
     {"title": "Change Password", "id": 1, "icon": Icons.password},
     {"title": "Rate The App", "id": 2, "icon": Icons.eighteen_up_rating},
@@ -36,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           builder: (context) {
             return LogoutPopup(onConfirm: () {
               Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+                MaterialPageRoute(builder: (context) => LoginView()),
                 (route) => false,
               );
             });

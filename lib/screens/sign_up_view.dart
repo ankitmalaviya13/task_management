@@ -3,23 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_management/core/constant/constant.dart';
 import 'package:task_management/screens/controllers/login_signUp_controller.dart';
-import 'package:task_management/screens/login_Screen.dart';
+import 'package:task_management/screens/login.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
 import '../core/color/color.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  final authCon = Get.put<LoginSignupController>(LoginSignupController());
-
+class SignUpView extends GetView<LoginSignupController> {
+  const SignUpView({super.key});
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -66,28 +58,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 30),
                     CommonTextFieldBorder(
-                      con: authCon.firstNameController,
+                      con: controller.firstNameController,
                       hintText: "First Name ",
                       hintTextColor: AppColor.primaryColor,
                       borderColor: AppColor.primaryColor,
                     ),
                     const SizedBox(height: 20),
                     CommonTextFieldBorder(
-                      con: authCon.lastNameController,
+                      con: controller.lastNameController,
                       hintText: "Last Name",
                       hintTextColor: AppColor.primaryColor,
                       borderColor: AppColor.primaryColor,
                     ),
                     const SizedBox(height: 20),
                     CommonTextFieldBorder(
-                      con: authCon.emailController,
+                      con: controller.emailController,
                       hintText: "Email Address",
                       hintTextColor: AppColor.primaryColor,
                       borderColor: AppColor.primaryColor,
                     ),
                     const SizedBox(height: 15),
                     CommonTextFieldBorder(
-                      con: authCon.passwordController,
+                      con: controller.passwordController,
                       hintText: "Password",
                       hintTextColor: AppColor.primaryColor,
                       borderColor: AppColor.primaryColor,
@@ -95,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 15),
                     CommonTextFieldBorder(
-                      con: authCon.confirmPasswordController,
+                      con: controller.confirmPasswordController,
                       hintText: "Confirm Password",
                       hintTextColor: AppColor.primaryColor,
                       borderColor: AppColor.primaryColor,
@@ -147,7 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       labelColor: AppColor.white,
                       labelSize: 17,
                       onPressed: () {
-                        authCon.signupApi();
+                        controller.signupApi();
                       },
                     ),
                     const SizedBox(height: 20),
@@ -170,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
+                                builder: (context) => const LoginView(),
                               ),
                             );
                           },
@@ -195,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
-        Obx(() => authCon.isSignupLoading.value ? customIndicator() : Container()),
+        Obx(() => controller.isSignupLoading.value ? customIndicator() : Container()),
       ],
     );
   }
