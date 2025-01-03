@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_management/core/constant/constant.dart';
+import 'package:task_management/screens/controllers/login_signUp_controller.dart';
 import 'package:task_management/screens/login_Screen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
@@ -7,171 +10,193 @@ import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
 import '../core/color/color.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final authCon = Get.put<LoginSignupController>(LoginSignupController());
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Spacer(),
-              const Row(
-                children: [
-                  CommonText(
-                    text: "Register Account",
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
-              ),
-              const Row(
-                children: [
-                  CommonText(
-                    text: "to",
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  SizedBox(width: 10),
-                  CommonText(
-                    text: "CANGLY",
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    color: AppColor.primaryColor,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              const CommonText(
-                text: "Hello there login to continue",
-                color: AppColor.textColor,
-              ),
-              const SizedBox(height: 30),
-              const CommonTextFieldBorder(
-                hintText: "First Name ",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-              ),
-              const SizedBox(height: 20),
-              const CommonTextFieldBorder(
-                hintText: "Last Name",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-              ),
-              const SizedBox(height: 20),
-              const CommonTextFieldBorder(
-                hintText: "Email Address",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-              ),
-              const SizedBox(height: 15),
-              const CommonTextFieldBorder(
-                hintText: "Password",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-                suffix: Icon(Icons.remove_red_eye_sharp),
-              ),
-              const SizedBox(height: 15),
-              const CommonTextFieldBorder(
-                hintText: "Confirm Password",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-                suffix: Icon(Icons.remove_red_eye_sharp),
-              ),
-              const SizedBox(height: 30),
-              Row(
-                children: [
-                  SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: Checkbox(
-                      value: true,
-                      onChanged: (v) {},
-                      activeColor: AppColor.primaryColor,
+    return Stack(
+      children: [
+        Scaffold(
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50), // Optional spacer for top padding
+                    const Row(
+                      children: [
+                        CommonText(
+                          text: "Register Account",
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        text: "I agree to the",
-                        style: TextStyle(
-                            color: (isDarkMode ? Colors.white : Colors.black),
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                        children: [
-                          TextSpan(
-                            recognizer: TapGestureRecognizer()..onTap = () {},
-                            text: "Terms & Conditions & Privacy Policy",
-                            style: const TextStyle(
-                              color: AppColor.primaryColor,
-                              overflow: TextOverflow.ellipsis,
+                    const Row(
+                      children: [
+                        CommonText(
+                          text: "to",
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        SizedBox(width: 10),
+                        CommonText(
+                          text: "CANGLY",
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.primaryColor,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    const CommonText(
+                      text: "Hello there login to continue",
+                      color: AppColor.textColor,
+                    ),
+                    const SizedBox(height: 30),
+                    CommonTextFieldBorder(
+                      con: authCon.firstNameController,
+                      hintText: "First Name ",
+                      hintTextColor: AppColor.primaryColor,
+                      borderColor: AppColor.primaryColor,
+                    ),
+                    const SizedBox(height: 20),
+                    CommonTextFieldBorder(
+                      con: authCon.lastNameController,
+                      hintText: "Last Name",
+                      hintTextColor: AppColor.primaryColor,
+                      borderColor: AppColor.primaryColor,
+                    ),
+                    const SizedBox(height: 20),
+                    CommonTextFieldBorder(
+                      con: authCon.emailController,
+                      hintText: "Email Address",
+                      hintTextColor: AppColor.primaryColor,
+                      borderColor: AppColor.primaryColor,
+                    ),
+                    const SizedBox(height: 15),
+                    CommonTextFieldBorder(
+                      con: authCon.passwordController,
+                      hintText: "Password",
+                      hintTextColor: AppColor.primaryColor,
+                      borderColor: AppColor.primaryColor,
+                      suffix: const Icon(Icons.remove_red_eye_sharp),
+                    ),
+                    const SizedBox(height: 15),
+                    CommonTextFieldBorder(
+                      con: authCon.confirmPasswordController,
+                      hintText: "Confirm Password",
+                      hintTextColor: AppColor.primaryColor,
+                      borderColor: AppColor.primaryColor,
+                      suffix: const Icon(Icons.remove_red_eye_sharp),
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: Checkbox(
+                            value: true,
+                            onChanged: (v) {},
+                            activeColor: AppColor.primaryColor,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              text: "I agree to the",
+                              style: TextStyle(
+                                  color: (isDarkMode ? Colors.white : Colors.black),
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                              children: [
+                                TextSpan(
+                                  recognizer: TapGestureRecognizer()..onTap = () {},
+                                  text: "Terms & Conditions & Privacy Policy",
+                                  style: const TextStyle(
+                                    color: AppColor.primaryColor,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: "set out by this site.",
+                                ),
+                              ],
                             ),
                           ),
-                          const TextSpan(
-                            text: "set out by this site.",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              CommonButton(
-                label: "Register",
-                labelColor: AppColor.white,
-                labelSize: 17,
-                onPressed: () {},
-              ),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: "Already have an account ? ",
-                      style: TextStyle(
-                        color: (isDarkMode ? Colors.white : Colors.black),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ));
-                    },
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        text: "Login",
-                        style: TextStyle(
-                          color: AppColor.primaryColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 30),
+                    CommonButton(
+                      label: "Register",
+                      labelColor: AppColor.white,
+                      labelSize: 17,
+                      onPressed: () {
+                        authCon.signupApi();
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: "Already have an account? ",
+                            style: TextStyle(
+                              color: (isDarkMode ? Colors.white : Colors.black),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: const TextSpan(
+                              text: "Login",
+                              style: TextStyle(
+                                color: AppColor.primaryColor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                  ],
+                ),
               ),
-              const SizedBox(height: 15),
-            ],
+            ),
           ),
         ),
-      ),
+        Obx(() => authCon.isSignupLoading.value ? customIndicator() : Container()),
+      ],
     );
   }
 }

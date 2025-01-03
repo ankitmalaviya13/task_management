@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:task_management/core/DeviceInfo/device_info.dart';
 import 'package:task_management/core/color/color.dart';
-import 'package:task_management/screens/bottomBar_Screen.dart';
 
-void main() {
+import 'core/DeviceInfo/device_information_model.dart';
+import 'screens/Routes/app_pages.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  await getDeviceInfo();
   runApp(MyApp());
+}
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await GetStorage.init();
+//   runApp(MyApp());
+// }
+
+Future<void> getDeviceInfo() async {
+  DeviceInformationModel deviceInfo = await DeviceInfo().initPlatformState();
+  // appVersion = deviceInfo.appVersion.toString();
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +30,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -23,7 +42,9 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueGrey,
       ),
       themeMode: ThemeMode.system,
-      home: const BottomBarScreen(),
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      defaultTransition: Transition.fadeIn,
     );
   }
 
