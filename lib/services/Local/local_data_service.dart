@@ -14,7 +14,7 @@ class StorageService {
   }
 
   // Method to remove user data (logout)
-  removeUserData(key) async {
+  removeData(key) async {
     await _box.remove(key);
   }
 }

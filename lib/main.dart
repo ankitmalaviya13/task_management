@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:task_management/providers/auth_provider.dart';
-import 'package:task_management/providers/splash_provider.dart';
-import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/splash_Screen.dart';
 
-void main() {
+import 'core/screen_size/screen_size.dart';
+import 'di/di.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  setupDependencies();
   runApp(MyApp());
 }
 
@@ -13,12 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return MultiProvider(
-      providers: [
-        // ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => LoginProvider()),
-        ChangeNotifierProvider(create: (_) => SplashProvider()),
-      ],
+      providers: providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -31,14 +33,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.blueGrey,
         ),
         themeMode: ThemeMode.system,
-        // theme: lightTheme,
-        // darkTheme: darkTheme,
-        // themeMode: ThemeMode.system,
-        // // theme: ThemeData(
-        // //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // //   useMaterial3: true,
-        // // ),
-        home: const BottomBarScreen(),
+        home: const Splashscreen(),
       ),
     );
   }

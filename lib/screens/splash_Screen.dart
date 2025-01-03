@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_management/providers/Authentication/auth_provider.dart';
 
 import '../core/color/color.dart';
 import '../core/constant/Assetimages.dart';
@@ -18,9 +19,10 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     final splashProvider = Provider.of<SplashProvider>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await splashProvider.initializeApp();
+      await splashProvider.initializeApp(authProvider);
 
       if (splashProvider.isAuthenticated) {
         Navigator.of(context).pushReplacement(

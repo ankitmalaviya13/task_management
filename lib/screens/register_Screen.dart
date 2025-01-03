@@ -1,14 +1,33 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/screens/login_Screen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
 import '../core/color/color.dart';
+import '../core/common_providers/password_visibility_provider.dart';
+import '../providers/Authentication/signup_provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => SignUpProvider(),
+      child: SignupWidget(),
+    );
+  }
+}
+
+class SignupWidget extends StatelessWidget {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,36 +71,59 @@ class RegisterScreen extends StatelessWidget {
                 color: AppColor.textColor,
               ),
               const SizedBox(height: 30),
-              const CommonTextFieldBorder(
+              CommonTextFieldBorder(
+                con: _firstNameController,
                 hintText: "First Name ",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 20),
-              const CommonTextFieldBorder(
+              CommonTextFieldBorder(
+                con: _lastNameController,
                 hintText: "Last Name",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 20),
-              const CommonTextFieldBorder(
+              CommonTextFieldBorder(
+                con: _emailController,
                 hintText: "Email Address",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 15),
-              const CommonTextFieldBorder(
-                hintText: "Password",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-                suffix: Icon(Icons.remove_red_eye_sharp),
+              Consumer<PasswordVisibilityProvider>(
+                builder: (context, authProvider, _) {
+                  return CommonTextFieldBorder(
+                    con: _passwordController,
+                    hintText: "Password",
+                    hintTextColor: AppColor.primaryColor,
+                    obscureText: authProvider.getVisibility(PasswordField.signupPassword.name),
+                    borderColor: AppColor.primaryColor,
+                    suffix: IconButton(
+                        onPressed: () {
+                          authProvider.toggleVisibility(PasswordField.signupPassword.name);
+                        },
+                        icon: Icon(Icons.remove_red_eye_sharp)),
+                  );
+                },
               ),
               const SizedBox(height: 15),
-              const CommonTextFieldBorder(
-                hintText: "Confirm Password",
-                hintTextColor: AppColor.primaryColor,
-                borderColor: AppColor.primaryColor,
-                suffix: Icon(Icons.remove_red_eye_sharp),
+              Consumer<PasswordVisibilityProvider>(
+                builder: (context, authProvider, _) {
+                  return CommonTextFieldBorder(
+                    con: _confirmPasswordController,
+                    hintText: "Confirm Password",
+                    hintTextColor: AppColor.primaryColor,
+                    obscureText: authProvider.getVisibility(PasswordField.signupConfirmPassword.name),
+                    borderColor: AppColor.primaryColor,
+                    suffix: IconButton(
+                        onPressed: () {
+                          authProvider.toggleVisibility(PasswordField.signupConfirmPassword.name);
+                        },
+                        icon: Icon(Icons.remove_red_eye_sharp)),
+                  );
+                },
               ),
               const SizedBox(height: 30),
               Row(
@@ -147,7 +189,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => LoginScreen(),
