@@ -10,7 +10,11 @@ class TodayTask extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: const Icon(Icons.arrow_back_ios_new_rounded),
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(Icons.arrow_back_ios_new_rounded)),
         title: const CommonText(
           text: "Today's Task",
           fontWeight: FontWeight.w500,
@@ -50,14 +54,15 @@ class TodayTask extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        CommonText(
-                          text: 'Client Review & Feedback',
-                          fontSize: 15,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                          overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: CommonText(
+                            text: 'Client Review & Feedback',
+                            fontSize: 15,
+                            color: AppColor.black,
+                            fontWeight: FontWeight.w500,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        Spacer(),
                         Icon(
                           Icons.more_vert,
                           color: AppColor.black,
