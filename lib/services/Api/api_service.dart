@@ -114,6 +114,8 @@ class ApiService {
       );
       return response;
     } catch (e) {
+      print("fslfhsflksjflksfsdf");
+      print(e.);
       rethrow;
     }
   }

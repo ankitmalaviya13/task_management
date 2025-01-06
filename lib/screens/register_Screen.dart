@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management/screens/login_Screen.dart';
+import 'package:task_management/screens/verify_Otp.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -133,18 +134,25 @@ class SignupWidget extends StatelessWidget {
                     SizedBox(
                       height: 20,
                       width: 20,
-                      child: Consumer<SignUpProvider>(
-                        builder: (context, signUpProvider, _) {
+                      child:
+
+                      Selector<SignUpProvider, bool>(
+
+                        selector: (context, provider) => provider.check,
+                        builder: (context, check, _) {
                           print("checkbox");
                           return Checkbox(
-                            value: true,
+                            value: check,
                             onChanged: (v) {
-                              signUpProvider.onCheckbox(v);
+                              context.read<SignUpProvider>().onCheckbox(v);
                             },
                             activeColor: AppColor.primaryColor,
                           );
                         },
+
                       ),
+
+
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -179,7 +187,25 @@ class SignupWidget extends StatelessWidget {
                   label: "Register",
                   labelColor: AppColor.white,
                   labelSize: 17,
-                  onPressed: () {},
+                  onPressed: () {
+                    final provider = Provider.of<SignUpProvider>(context, listen: false);
+                    provider.signup(
+                     _emailController.text,
+                     _passwordController.text,
+                     _firstNameController.text,
+                      _lastNameController.text,
+                    ).then((v){
+                      if(v==null){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>  VerifyOtp(email: _emailController.text,pass_req: 0,),
+                            ));
+                      }
+
+
+                    });
+                  },
                 ),
                 const Spacer(),
                 Row(
@@ -222,14 +248,20 @@ class SignupWidget extends StatelessWidget {
               ],
             ),
           ),
-          Consumer<SignUpProvider>(
-            builder: (context, signUpProvider, _) {
-              print("loading");
-              return signUpProvider.isLoading ? customIndicator() : SizedBox();
+          Selector<SignUpProvider, bool>(
+
+            selector: (context, provider) => provider.isLoading,
+            builder: (context, isLoading, _) {
+              print("Loader rebuilt");
+              return isLoading ? customIndicator() : const SizedBox();
             },
+
           ),
+
         ],
       ),
     );
   }
 }
+
+

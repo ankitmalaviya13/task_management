@@ -4,6 +4,7 @@ import '../../core/color/color.dart';
 import '../../core/screen_size/screen_size.dart';
 
 customIndicator() {
+  print("fsdfijshdfkjdf indicator");
   return Container(
     height: ScreenSize.height,
     width: ScreenSize.width,

@@ -3,7 +3,7 @@ import 'package:task_management/core/color/color.dart';
 import 'package:task_management/screens/addTeam_Member.dart';
 import 'package:task_management/screens/home_Screen.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
-import 'package:task_management/screens/profile_creen.dart';
+import 'package:task_management/screens/profile_screen.dart';
 import 'package:task_management/screens/schedule_Screen.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';

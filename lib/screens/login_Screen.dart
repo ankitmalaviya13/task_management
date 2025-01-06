@@ -4,6 +4,7 @@ import 'package:task_management/core/color/color.dart';
 import 'package:task_management/screens/bottomBar_Screen.dart';
 import 'package:task_management/screens/forgotPassword_Screen.dart';
 import 'package:task_management/screens/register_Screen.dart';
+import 'package:task_management/screens/verify_Otp.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -177,30 +178,22 @@ class LoginWidget extends StatelessWidget {
   void _login(context) async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
-
-    // if (email.isEmpty || !RegExp(r"^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+").hasMatch(email)) {
-    //   Toasty.showtoast('Please enter a valid email address');
-    //
-    //   return;
-    // }
-    // if (password.isEmpty || password.length < 6) {
-    //   Toasty.showtoast('Password must be at least 6 characters long');
-    //
-    //   return;
-    // }
-
     final provider = Provider.of<LoginProvider>(context, listen: false);
-    final errorMessage = await provider.login(email, password);
-    print("gfdkgjdhfgkdjghk");
-    print(errorMessage);
-    if (errorMessage == null) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const BottomBarScreen(),
-          )); // Replace with your home route
-    } else {
-      Toasty.showtoast(errorMessage);
-    }
+    await provider.login(email, password).then((v) {
+      if (v == null) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BottomBarScreen(),
+            )); //
+      }
+      if (v == 2) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VerifyOtp(email: _emailController.text, pass_req: 1),
+            ));
+      }
+    });
   }
 }

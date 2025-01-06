@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/Authentication/logout_provider.dart';
+import 'loading_widget.dart';
 
 class LogoutPopup extends StatelessWidget {
-  final void Function()? onConfirm;
 
-  const LogoutPopup({Key? key, this.onConfirm}) : super(key: key);
+
+  const LogoutPopup({Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,33 @@ class LogoutPopup extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('Cancel'),
         ),
-        ElevatedButton(
-          onPressed: () {
-            if (onConfirm != null) {
-              onConfirm!();
-            }
-            Navigator.of(context).pop();
+        Selector<LogoutProvider, bool>(
+          selector: (context, provider) => provider.isLoading,
+          builder: (context, isLoading, _) {
+            print("Loader rebuilt");
+            return isLoading ? customIndicatorMore() :    ElevatedButton(
+
+              onPressed: () {
+                final provider = Provider.of<LogoutProvider>(context, listen: false);
+                provider.logOut().then((v) {
+
+                  if(v==null){
+                    Navigator.of(context).pop();
+
+                  }
+
+                });
+
+
+
+
+              },
+              child: const Text('Logout'),
+            );
           },
-          child: const Text('Logout'),
         ),
+
+
       ],
     );
   }

@@ -1,12 +1,13 @@
 import 'package:get_it/get_it.dart';
 
-import '../../core/device_helper/device_helper.dart';
-import '../../model/signup_model.dart';
+
+
+import '../../model/forgot_password_model.dart';
 import '../../screens/widgets/toast.dart';
 import '../../services/Api/AuthApiService.dart';
 import 'auth_provider.dart';
 
-class SignUpProvider extends AuthProvider {
+class ForgotPasswordProvider extends AuthProvider {
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
 
   bool _isLoading = false;
@@ -18,26 +19,11 @@ class SignUpProvider extends AuthProvider {
     notifyListeners();
   }
 
-  bool check = false;
-
-  onCheckbox(v) {
-    check = v;
-    notifyListeners();
-  }
-
-  Future signup(String email, String password, String firstName, String lastName) async {
+  Future forgotPassword(String email) async {
     setLoading(true);
-    Map<String, String?> deviceDetails = await LoginDeviceHelper.getLoginDeviceDetails();
-
-    final response = await _authApiService.signup(
+    final response = await _authApiService.forgotPassword(
       data: {
         'email': email,
-        'password': password,
-        'firstName': firstName,
-        'lastName': lastName,
-        'devicetoken': deviceDetails["deviceToken"],
-        'deviceId': deviceDetails["deviceId"],
-        'devicetype': deviceDetails["deviceType"],
       },
     );
     print("Gdsflgdgkljhf");
@@ -45,14 +31,11 @@ class SignUpProvider extends AuthProvider {
     print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.data);
-      SignupModel data = SignupModel.fromJson(response.data);
+      ForgotPasswordModel data = ForgotPasswordModel.fromJson(response.data);
       if (data.status == 1) {
-
-
         setLoading(false);
         return null;
       } else {
-
         setLoading(false);
         Toasty.showtoast(data.message.toString());
         return data.message.toString();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/screens/rating_screen.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
@@ -6,6 +7,7 @@ import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/logout_popup.dart';
 
 import '../core/color/color.dart';
+import '../providers/Authentication/logout_provider.dart';
 import 'change_password.dart';
 import 'login_Screen.dart';
 
@@ -34,14 +36,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           builder: (context) {
-            return LogoutPopup(onConfirm: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-                (route) => false,
-              );
-            });
+            return ChangeNotifierProvider(
+              create: (_) => LogoutProvider(),
+              child: LogoutPopup(
+
+              ),
+            );
           },
-        );
+        ).then((v){
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+                (route) => false,
+          );
+        });
         break;
     }
   }

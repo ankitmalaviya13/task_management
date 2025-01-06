@@ -64,7 +64,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   // Log out method
-  Future<void> logOut() async {
+  Future<void> logOutlocal() async {
     _isAuthenticated = false;
     _authToken = null;
     _userId = null;

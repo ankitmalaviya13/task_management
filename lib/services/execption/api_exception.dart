@@ -54,13 +54,18 @@ class ApiException implements Exception {
   String toString() => message;
 
   String _handleError(int? statusCode, dynamic error) {
+    print("fskdfhsfkjshfskj");
+    print(error);
     switch (statusCode) {
       case 400:
         return error['message'];
       case 401:
         return error['message'];
       case 403:
-        //TODO add token expired code
+        // Navigator.of(context).pushAndRemoveUntil(
+        //   MaterialPageRoute(builder: (context) => LoginScreen()),
+        //       (route) => false,
+        // );
         return error;
       case 404:
         return error['message'];

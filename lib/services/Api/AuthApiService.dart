@@ -40,4 +40,155 @@ class AuthApiService extends ApiService {
       return errorResponse;
     }
   }
+
+  Future<Response> signup({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.signup,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> forgotPassword({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.forgetpassword,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> resendOtp({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.forgetpassword,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> verifyOtp({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.verifyOtp,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> resetPassword({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.resetPassword,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> logOUt({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await delete(
+        AppUrl.logout,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
 }

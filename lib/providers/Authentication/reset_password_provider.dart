@@ -1,13 +1,15 @@
 import 'package:get_it/get_it.dart';
-import 'package:task_management/services/Api/AuthApiService.dart';
 
 import '../../core/device_helper/device_helper.dart';
-import '../../model/login_model.dart';
+import '../../model/reset_password_model.dart';
+import '../../model/signup_model.dart';
 import '../../screens/widgets/toast.dart';
+import '../../services/Api/AuthApiService.dart';
 import 'auth_provider.dart';
 
-class LoginProvider extends AuthProvider {
+class ResetPasswordProvider extends AuthProvider {
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
+
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
@@ -17,39 +19,29 @@ class LoginProvider extends AuthProvider {
     notifyListeners();
   }
 
-  Future login(String email, String password) async {
+  Future resetPassword(String email,String otp, String password) async {
     setLoading(true);
+    print("fskfjhskfjsdh");
+    print(password);
     Map<String, String?> deviceDetails = await LoginDeviceHelper.getLoginDeviceDetails();
 
-    final response = await _authApiService.login(
+    final response = await _authApiService.resetPassword(
       data: {
         'email': email,
+        'otp': otp,
         'password': password,
-        'devicetoken': deviceDetails["deviceToken"],
-        'deviceId': deviceDetails["deviceId"],
-        'devicetype': deviceDetails["deviceType"],
       },
     );
+    print("Gdsflgdgkljhf");
+    print(response);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.data);
-      LoginModel data = LoginModel.fromJson(response.data);
+      ResetPasswordModel data = ResetPasswordModel.fromJson(response.data);
       if (data.status == 1) {
-        await loggedIn(
-          token: data.userToken ?? '',
-          userId: data.user?.id ?? "",
-          email: data.user?.email ?? "",
-          firstName: data.user?.firstName ?? "",
-          lastName: data.user?.lastName ?? "",
-          profilePic: data.user?.profilepic ?? "",
-        );
-
         setLoading(false);
         return null;
-      } else if (data.status == 2){
-        setLoading(false);
-        Toasty.showtoast(data.message.toString());
-        return 2;
-      }else {
+      } else {
         setLoading(false);
         Toasty.showtoast(data.message.toString());
         return data.message.toString();
@@ -59,7 +51,5 @@ class LoginProvider extends AuthProvider {
       Toasty.showtoast(response.statusMessage.toString());
       return response.statusMessage.toString();
     }
-
-
   }
 }

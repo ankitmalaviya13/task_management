@@ -1,69 +1,69 @@
 import 'dart:convert';
 
-class LoginModel {
+class VerifyOtpModel {
   int? status;
   String? message;
-  User? user;
+  Info? info;
   String? userToken;
 
-  LoginModel({
+  VerifyOtpModel({
     this.status,
     this.message,
-    this.user,
+    this.info,
     this.userToken,
   });
 
-  factory LoginModel.fromRawJson(String str) => LoginModel.fromJson(json.decode(str));
+  factory VerifyOtpModel.fromRawJson(String str) => VerifyOtpModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+  factory VerifyOtpModel.fromJson(Map<String, dynamic> json) => VerifyOtpModel(
     status: json["Status"],
     message: json["Message"],
-    user: json["user"] == null ? null : User.fromJson(json["user"]),
+    info: json["info"] == null ? null : Info.fromJson(json["info"]),
     userToken: json["UserToken"],
   );
 
   Map<String, dynamic> toJson() => {
     "Status": status,
     "Message": message,
-    "user": user?.toJson(),
+    "info": info?.toJson(),
     "UserToken": userToken,
   };
 }
 
-class User {
-  String? profilepic;
+class Info {
   String? id;
   String? firstName;
   String? lastName;
   String? email;
+  String? profilepic;
 
-  User({
-    this.profilepic,
+  Info({
     this.id,
     this.firstName,
     this.lastName,
     this.email,
+    this.profilepic,
   });
 
-  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
+  factory Info.fromRawJson(String str) => Info.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    profilepic: json["profilepic"],
+  factory Info.fromJson(Map<String, dynamic> json) => Info(
     id: json["_id"],
     firstName: json["firstName"],
     lastName: json["lastName"],
     email: json["email"],
+    profilepic: json["profilepic"],
   );
 
   Map<String, dynamic> toJson() => {
-    "profilepic": profilepic,
     "_id": id,
     "firstName": firstName,
     "lastName": lastName,
     "email": email,
+    "profilepic": profilepic,
   };
 }
