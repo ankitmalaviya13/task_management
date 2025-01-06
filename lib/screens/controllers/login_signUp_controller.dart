@@ -17,9 +17,17 @@ class LoginSignupController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController otpController = TextEditingController();
+
+  final loginFormKey = GlobalKey<FormState>();
+  final signUpFormKey = GlobalKey<FormState>();
+  final forgotFormKey = GlobalKey<FormState>();
+  final resetFormKey = GlobalKey<FormState>();
+  final forgotPinKey = GlobalKey<FormState>();
+
   RxBool isLoginLoading = false.obs;
   RxBool isSignupLoading = false.obs;
   RxBool isVerifyPinLoading = false.obs;
+  RxBool obSecurePassword = true.obs;
   String? token;
 
   storedata({token, userId, email, firstName, lastName}) {
@@ -114,5 +122,15 @@ class LoginSignupController extends GetxController {
       isVerifyPinLoading.value = false;
       Toasty.showtoast(response.statusMessage.toString());
     }
+  }
+
+  onTapLogin() async {
+    if (loginFormKey.currentState!.validate()) {
+      loginApi();
+    }
+  }
+
+  onTapKeyboard(context) {
+    FocusScope.of(context).unfocus();
   }
 }
