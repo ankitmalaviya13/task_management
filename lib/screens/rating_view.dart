@@ -1,32 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:task_management/core/color/color.dart';
+import 'package:task_management/screens/controllers/bottomBar_controller.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
-import '../core/color/color.dart';
-
-class RatingScreen extends StatefulWidget {
-  final void Function(double rating, String feedback)? onSubmit;
-
-  const RatingScreen({Key? key, this.onSubmit}) : super(key: key);
-
-  @override
-  _RatingScreenState createState() => _RatingScreenState();
-}
-
-class _RatingScreenState extends State<RatingScreen> {
-  double _rating = 0.0;
-  String _feedback = '';
-
-  void _submitRating() {
-    if (widget.onSubmit != null) {
-      widget.onSubmit!(_rating, _feedback);
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Rating Submitted: $_rating, Feedback: $_feedback')),
-    );
-  }
-
+class RatingView extends GetView<BottomBarController>{
+  const RatingView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,23 +27,18 @@ class _RatingScreenState extends State<RatingScreen> {
                 fontWeight: FontWeight.w700,
               ),
               const SizedBox(height: 50),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(5, (index) {
-                  return IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _rating = index + 1.0;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.star,
-                      color: index < _rating ? AppColor.primaryColor : Colors.grey,
-                      size: 32,
-                    ),
-                  );
-                }),
+              RatingBar.builder(
+                initialRating: controller.ratingValue.value ?? 0.0,
+                glowColor: Colors.red,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                glow: true,
+                unratedColor: AppColor.primaryColor.withOpacity(0.25),
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(Icons.star, color: AppColor.primaryColor),
+                onRatingUpdate: (val) => controller.ratingValue.value = val,
               ),
               const SizedBox(height: 16),
               const CommonTextFieldBorder(
@@ -76,7 +53,9 @@ class _RatingScreenState extends State<RatingScreen> {
                 label: "Submit Feedback",
                 labelColor: AppColor.white,
                 labelSize: 17,
-                onPressed: () {},
+                onPressed: () {
+                  controller.rateUS();
+                },
               ),
             ],
           ),
