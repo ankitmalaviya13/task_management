@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 
 import '../../core/constant/app_url.dart';
 import '../../screens/widgets/toast.dart';
+import '../execption/api_exception.dart';
 
 class ApiService {
   static final _options = BaseOptions(
@@ -36,8 +37,18 @@ class ApiService {
         onReceiveProgress: onReceiveProgress,
       );
       return response;
-    } catch (e) {
-      rethrow;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      // Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      return Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : ApiException.fromDioError(e).message.toString(),
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      // return errorResponse;
     }
   }
 
@@ -63,8 +74,18 @@ class ApiService {
       );
       developer.log("dskladjaskdjsa ${response.data}");
       return response;
-    } catch (e) {
-      rethrow;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      // Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      return Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : ApiException.fromDioError(e).message.toString(),
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      // return errorResponse;
     }
   }
 
@@ -89,8 +110,18 @@ class ApiService {
         onReceiveProgress: onReceiveProgress,
       );
       return response;
-    } catch (e) {
-      rethrow;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      // Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      return Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : ApiException.fromDioError(e).message.toString(),
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      // return errorResponse;
     }
   }
 
@@ -113,10 +144,18 @@ class ApiService {
         cancelToken: cancelToken,
       );
       return response;
-    } catch (e) {
-      print("fslfhsflksjflksfsdf");
-      print(e.);
-      rethrow;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      // Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      return Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : ApiException.fromDioError(e).message.toString(),
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      // return errorResponse;
     }
   }
 

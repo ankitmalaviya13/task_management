@@ -4,6 +4,7 @@ import 'package:task_management/providers/Authentication/auth_provider.dart';
 
 import '../core/color/color.dart';
 import '../core/constant/Assetimages.dart';
+import '../core/screen_size/screen_size.dart';
 import '../providers/splash_provider.dart';
 import 'bottomBar_Screen.dart';
 import 'login_Screen.dart';
@@ -39,14 +40,13 @@ class _SplashscreenState extends State<Splashscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    ScreenSize.init(context);
 
     return Scaffold(
       body: Container(
         color: AppColor.primaryColor,
-        height: screenHeight,
-        width: screenWidth,
+        height: ScreenSize.height,
+        width: ScreenSize.width,
         child: Image.asset(
           AppAssetImage.logo,
           fit: BoxFit.fill,

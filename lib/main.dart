@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management/screens/splash_Screen.dart';
 
-import 'core/screen_size/screen_size.dart';
+import 'core/navigation/navigation_service.dart';
 import 'di/di.dart';
 
 Future<void> main() async {
@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.init(context);
+    // ScreenSize.init(context);
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        navigatorKey: NavigationService.navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

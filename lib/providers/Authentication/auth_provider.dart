@@ -4,6 +4,13 @@ import '../../core/constant/Localvariables.dart';
 import '../../services/Local/local_data_service.dart';
 
 class AuthProvider with ChangeNotifier {
+  // static final AuthProvider _instance = AuthProvider._internal();
+  //
+  // factory AuthProvider() {
+  //   return _instance;
+  // }
+  //
+  // AuthProvider._internal();
   bool _isAuthenticated = false;
   String? _authToken;
   String? _userId;
@@ -20,9 +27,16 @@ class AuthProvider with ChangeNotifier {
   String? get lastName => _lastName;
   String? get email => _email;
   String? get profilePic => _profilePic;
+  String? get name {
+    return "${_firstName} ${_lastName}";
+  }
 
   // Initialize data from local storage
   Future<void> initializeFromLocalStorage() async {
+    print("fdskfjhsdfksfjkd");
+    print(_authToken);
+    print(_firstName);
+    print("fdskfjhsdfksfjkd");
     print("fdskfjhsdfksfjkd");
     _authToken = await StorageService().getData(LocalVariables.token);
     _userId = await StorageService().getData(LocalVariables.userId);
@@ -65,6 +79,7 @@ class AuthProvider with ChangeNotifier {
 
   // Log out method
   Future<void> logOutlocal() async {
+    print("fjhfjsdhsf");
     _isAuthenticated = false;
     _authToken = null;
     _userId = null;

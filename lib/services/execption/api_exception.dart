@@ -1,8 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+import '../../core/navigation/navigation_service.dart';
+import '../../screens/login_Screen.dart';
 
 class ApiException implements Exception {
   ApiException.fromDioError(DioException dioError) {
     print(dioError.type);
+    print(dioError.response);
+    print(dioError.response?.statusMessage);
     print("fashdfkjahfkhak");
     switch (dioError.type) {
       case DioExceptionType.cancel:
@@ -17,7 +23,7 @@ class ApiException implements Exception {
       case DioExceptionType.badResponse:
         message = _handleError(
           dioError.response?.statusCode,
-          dioError.response?.statusMessage,
+          dioError.response?.data.toString(),
         );
         break;
       case DioExceptionType.sendTimeout:
@@ -58,23 +64,24 @@ class ApiException implements Exception {
     print(error);
     switch (statusCode) {
       case 400:
-        return error['message'];
+        return error;
       case 401:
-        return error['message'];
+        return error;
       case 403:
-        // Navigator.of(context).pushAndRemoveUntil(
-        //   MaterialPageRoute(builder: (context) => LoginScreen()),
-        //       (route) => false,
-        // );
+        print("fsdfdsffdsfd");
+        NavigationService.navigatorKey.currentState?.pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+          (route) => false,
+        );
         return error;
       case 404:
-        return error['message'];
+        return error;
       case 409:
-        return error['message'];
+        return error;
       case 422:
-        return error['message'];
+        return error;
       case 429:
-        return error['message'];
+        return error;
       case 500:
         return "INTERNAL_ERROR";
       case 502:

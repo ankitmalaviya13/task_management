@@ -1,17 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../core/device_helper/device_helper.dart';
 import '../../model/forgot_password_model.dart';
-import '../../model/signup_model.dart';
 import '../../model/verify_otp_model.dart';
 import '../../screens/widgets/toast.dart';
-import '../../services/Api/AuthApiService.dart';
+import '../../services/Api/auth_api_service.dart';
 import 'auth_provider.dart';
 
-class VerifyOtpProvider extends AuthProvider {
+class VerifyOtpProvider extends ChangeNotifier {
   final _email;
   final _pass_req;
+
   VerifyOtpProvider(this._email, this._pass_req);
+  final authProvider = GetIt.instance<AuthProvider>();
 
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
   bool _isLoading = false;
@@ -68,7 +69,7 @@ class VerifyOtpProvider extends AuthProvider {
       VerifyOtpModel data = VerifyOtpModel.fromJson(response.data);
       if (data.status == 1) {
         if (_pass_req == 0 || _pass_req == 1) {
-          await loggedIn(
+          await authProvider.loggedIn(
             token: data.userToken ?? '',
             userId: data.info?.id ?? "",
             email: data.info?.email ?? "",

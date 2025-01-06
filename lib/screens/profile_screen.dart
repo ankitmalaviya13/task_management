@@ -7,6 +7,7 @@ import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/logout_popup.dart';
 
 import '../core/color/color.dart';
+import '../providers/Authentication/auth_provider.dart';
 import '../providers/Authentication/logout_provider.dart';
 import 'change_password.dart';
 import 'login_Screen.dart';
@@ -38,15 +39,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           builder: (context) {
             return ChangeNotifierProvider(
               create: (_) => LogoutProvider(),
-              child: LogoutPopup(
-
-              ),
+              child: LogoutPopup(),
             );
           },
-        ).then((v){
+        ).then((v) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LoginScreen()),
-                (route) => false,
+            (route) => false,
           );
         });
         break;
@@ -77,17 +76,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const CommonText(
-                text: "Shane Whatson",
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
+              Selector<AuthProvider, String?>(
+                selector: (context, provider) => provider.name,
+                builder: (context, name, _) {
+                  print("Loader rebuilt");
+                  return CommonText(
+                    text: name,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  );
+                },
               ),
               const SizedBox(
                 height: 5,
               ),
-              const CommonText(
-                text: "Shanewhatson@gmail.com",
-                fontSize: 18,
+              Selector<AuthProvider, String?>(
+                selector: (context, provider) => provider.email,
+                builder: (context, email, _) {
+                  print("Loader rebuilt");
+                  return CommonText(
+                    text: email,
+                    fontSize: 18,
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,

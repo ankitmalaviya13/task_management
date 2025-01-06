@@ -1,13 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-
-
 
 import '../../model/forgot_password_model.dart';
 import '../../screens/widgets/toast.dart';
-import '../../services/Api/AuthApiService.dart';
-import 'auth_provider.dart';
+import '../../services/Api/auth_api_service.dart';
 
-class ForgotPasswordProvider extends AuthProvider {
+class ForgotPasswordProvider extends ChangeNotifier {
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
 
   bool _isLoading = false;

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
 import 'package:task_management/screens/notification_screen.dart';
 import 'package:task_management/screens/today_Task.dart';
@@ -7,6 +8,7 @@ import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield.dart';
 
 import '../core/color/color.dart';
+import '../providers/Authentication/auth_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -35,17 +37,23 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonText(
+                    const CommonText(
                       text: "Hey",
                       fontSize: 15,
                     ),
-                    CommonText(
-                      text: "Shane Watson",
-                      fontWeight: FontWeight.w700,
-                    )
+                    Selector<AuthProvider, String?>(
+                      selector: (context, provider) => provider.name,
+                      builder: (context, name, _) {
+                        print("Loader rebuilt");
+                        return CommonText(
+                          text: name,
+                          fontWeight: FontWeight.w700,
+                        );
+                      },
+                    ),
                   ],
                 ),
                 const Spacer(),

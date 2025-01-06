@@ -1,12 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../core/device_helper/device_helper.dart';
 import '../../model/signup_model.dart';
 import '../../screens/widgets/toast.dart';
-import '../../services/Api/AuthApiService.dart';
-import 'auth_provider.dart';
+import '../../services/Api/auth_api_service.dart';
 
-class SignUpProvider extends AuthProvider {
+class SignUpProvider extends ChangeNotifier {
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
 
   bool _isLoading = false;
@@ -47,12 +47,9 @@ class SignUpProvider extends AuthProvider {
       print(response.data);
       SignupModel data = SignupModel.fromJson(response.data);
       if (data.status == 1) {
-
-
         setLoading(false);
         return null;
       } else {
-
         setLoading(false);
         Toasty.showtoast(data.message.toString());
         return data.message.toString();

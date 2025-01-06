@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:task_management/core/color/color.dart';
 
-class CommonTextFieldBorder extends StatelessWidget {
+class CommonTextFieldBorder extends StatefulWidget {
   final String? hintText;
   final String? headerLabel;
   final EdgeInsetsGeometry? contentPadding;
@@ -47,43 +47,48 @@ class CommonTextFieldBorder extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CommonTextFieldBorder> createState() => _CommonTextFieldBorderState();
+}
+
+class _CommonTextFieldBorderState extends State<CommonTextFieldBorder> {
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxLine ?? 1,
-      controller: con,
-      keyboardType: keyBoardType,
-      validator: validator,
-      readOnly: readOnly ?? false,
-      onTap: onTap,
+      maxLines: widget.maxLine ?? 1,
+      controller: widget.con,
+      keyboardType: widget.keyBoardType,
+      validator: widget.validator,
+      readOnly: widget.readOnly ?? false,
+      onTap: widget.onTap,
       enabled: true,
-      obscureText: obscureText ?? false,
-      inputFormatters: inputFormatters,
+      obscureText: widget.obscureText ?? false,
+      inputFormatters: widget.inputFormatters,
       cursorColor: AppColor.primaryColor,
       decoration: InputDecoration(
         filled: true,
-        isDense: isDense ?? false,
-        hintText: hintText,
-        contentPadding: contentPadding,
-        prefixIcon: prefix,
-        suffixIcon: suffix,
+        isDense: widget.isDense ?? false,
+        hintText: widget.hintText,
+        contentPadding: widget.contentPadding,
+        prefixIcon: widget.prefix,
+        suffixIcon: widget.suffix,
         hintStyle: TextStyle(
-          color: hintTextColor ?? AppColor.textColor,
-          fontWeight: hintTextFontWeight ?? FontWeight.w500,
-          fontSize: hintTextFontSize ?? 14,
+          color: widget.hintTextColor ?? AppColor.textColor,
+          fontWeight: widget.hintTextFontWeight ?? FontWeight.w500,
+          fontSize: widget.hintTextFontSize ?? 14,
         ),
-        fillColor: fillColor ?? AppColor.white,
+        fillColor: widget.fillColor ?? AppColor.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: borderColor ?? AppColor.white),
+          borderSide: BorderSide(color: widget.borderColor ?? AppColor.white),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: borderColor ?? AppColor.white),
+          borderSide: BorderSide(color: widget.borderColor ?? AppColor.white),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
           borderSide: BorderSide(
-            color: borderColor ?? AppColor.white,
+            color: widget.borderColor ?? AppColor.white,
           ),
         ),
       ),

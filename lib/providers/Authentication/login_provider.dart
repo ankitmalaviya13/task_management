@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-import 'package:task_management/services/Api/AuthApiService.dart';
 
 import '../../core/device_helper/device_helper.dart';
 import '../../model/login_model.dart';
 import '../../screens/widgets/toast.dart';
+import '../../services/Api/auth_api_service.dart';
 import 'auth_provider.dart';
 
-class LoginProvider extends AuthProvider {
+class LoginProvider extends ChangeNotifier {
+  final authProvider = GetIt.instance<AuthProvider>();
   final AuthApiService _authApiService = GetIt.instance<AuthApiService>();
   bool _isLoading = false;
 
@@ -34,7 +36,7 @@ class LoginProvider extends AuthProvider {
       print(response.data);
       LoginModel data = LoginModel.fromJson(response.data);
       if (data.status == 1) {
-        await loggedIn(
+        await authProvider.loggedIn(
           token: data.userToken ?? '',
           userId: data.user?.id ?? "",
           email: data.user?.email ?? "",
@@ -45,11 +47,11 @@ class LoginProvider extends AuthProvider {
 
         setLoading(false);
         return null;
-      } else if (data.status == 2){
+      } else if (data.status == 2) {
         setLoading(false);
         Toasty.showtoast(data.message.toString());
         return 2;
-      }else {
+      } else {
         setLoading(false);
         Toasty.showtoast(data.message.toString());
         return data.message.toString();
@@ -59,7 +61,5 @@ class LoginProvider extends AuthProvider {
       Toasty.showtoast(response.statusMessage.toString());
       return response.statusMessage.toString();
     }
-
-
   }
 }
