@@ -7,7 +7,7 @@ import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
-class RatingView extends GetView<BottomBarController>{
+class RatingView extends GetView<BottomBarController> {
   const RatingView({super.key});
   @override
   Widget build(BuildContext context) {

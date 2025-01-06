@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/forgot_password_view.dart';
 import 'package:task_management/screens/login_view.dart';
+import 'package:task_management/screens/reset_password_view.dart';
+import 'package:task_management/screens/sign_up_view.dart';
 import 'package:task_management/screens/splash_Screen.dart';
 import 'package:task_management/screens/verify_otp_view.dart';
 
@@ -23,13 +26,28 @@ class AppPages {
       // binding: SplashBinding(),
     ),
     GetPage(
+      name: _Paths.LOGIN_SIGNUP,
+      page: () => const SignUpView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
       name: _Paths.BOTTOMBAR,
       page: () => const BottomBarScreen(),
       // binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.VERIFYOTP,
-      page: () => const VerifyOtpView(),
+      page: () => VerifyOtpView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOTPASSWORD,
+      page: () => const ForgotPasswordView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESETPASSWORD,
+      page: () => const ResetPasswordView(),
       // binding: SplashBinding(),
     ),
   ];

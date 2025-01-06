@@ -13,6 +13,8 @@ class AppUrl {
   static const String login = 'api/user/login';
   static const String signUp = 'api/user';
   static const String verifyOtp = 'api/user/verifyOtp';
+  static const String forgotPassword = 'api/user/forgetpassword';
+  static const String resetPassword = 'api/user/resetPassword';
   static const String logOut = 'api/user/logout';
   static const String RateUs = 'api/rate';
 }

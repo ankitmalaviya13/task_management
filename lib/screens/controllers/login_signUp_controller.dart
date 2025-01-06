@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_management/core/Apis/loginSignupApis.dart';
 import 'package:task_management/core/DeviceInfo/device_info.dart';
+import 'package:task_management/core/Models/ForgotModel.dart';
+import 'package:task_management/core/Models/ResetPasswordModel.dart';
 import 'package:task_management/core/Models/SignUpModel.dart';
 import 'package:task_management/core/Models/VerifyModel.dart';
 import 'package:task_management/core/Models/loginModel.dart';
@@ -27,8 +29,13 @@ class LoginSignupController extends GetxController {
   RxBool isLoginLoading = false.obs;
   RxBool isSignupLoading = false.obs;
   RxBool isVerifyPinLoading = false.obs;
+  RxBool isForgotLoading = false.obs;
+  RxBool isForgotPinLoading = false.obs;
+  RxBool isResetLoading = false.obs;
   RxBool obSecurePassword = true.obs;
   RxBool obSecureConfirmPassword = true.obs;
+  RxBool isResend = false.obs;
+  RxInt passReq = 0.obs;
   String? token;
 
   storedata({token, userId, email, firstName, lastName}) {
@@ -117,11 +124,79 @@ class LoginSignupController extends GetxController {
       } else {
         isVerifyPinLoading.value = false;
         Toasty.showtoast(data.message.toString());
-        Get.toNamed(Routes.BOTTOMBAR);
+        Get.toNamed(Routes.RESETPASSWORD);
       }
     } else {
       isVerifyPinLoading.value = false;
       Toasty.showtoast(response.statusMessage.toString());
+    }
+  }
+
+  forgotPassword() async {
+    isForgotLoading.value = true;
+    isForgotPinLoading.value = true;
+
+    final response = await loginSignupApi.forgotPassword(
+      data: {
+        'email': emailController.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      ForgotModel data = ForgotModel.fromJson(response.data);
+      if (data.status == true) {
+        isForgotLoading.value = false;
+        isForgotPinLoading.value = false;
+        Get.toNamed(Routes.VERIFYOTP)?.then((value) {
+          if (value != null) {
+            Get.back(result: value);
+          }
+        });
+      } else {
+        isForgotLoading.value = false;
+        isForgotPinLoading.value = false;
+        Toasty.showtoast(data.message.toString());
+        Get.toNamed(Routes.VERIFYOTP);
+      }
+      if (isResend.value == true) {
+        Toasty.showtoast("Resend Code Successfully");
+        otpController.clear();
+      }
+    } else {
+      isForgotLoading.value = false;
+      isForgotPinLoading.value = false;
+      Toasty.showtoast(response.statusMessage.toString());
+    }
+  }
+
+  ResetPassword() async {
+    isResetLoading.value = true;
+
+    final response = await loginSignupApi.resetPassword(
+      data: {
+        'email': emailController.text,
+        'password': passwordController.text,
+        'otp': otpController.text,
+      },
+    );
+
+    isResetLoading.value = false;
+
+    if (response.statusCode == 200) {
+      final data = ChangePasswordModel.fromJson(response.data);
+
+      if (data.status == true) {
+        showSuccessDialog(
+          title: "Password Changed Successfully",
+          subtext: data.message ?? "You can now log in with your new password.",
+        );
+        await Future.delayed(const Duration(seconds: 2));
+        Get.toNamed(Routes.BOTTOMBAR);
+      } else {
+        Toasty.showtoast(data.message ?? "Something went wrong.");
+      }
+    } else {
+      Toasty.showtoast(response.statusMessage ?? "An error occurred.");
     }
   }
 
@@ -134,6 +209,18 @@ class LoginSignupController extends GetxController {
   onTapSignUp() async {
     if (signUpFormKey.currentState!.validate()) {
       signupApi();
+    }
+  }
+
+  onTapForgot() async {
+    if (forgotFormKey.currentState!.validate()) {
+      forgotPassword();
+    }
+  }
+
+  onTapReset() async {
+    if (resetFormKey.currentState!.validate()) {
+      ResetPassword();
     }
   }
 

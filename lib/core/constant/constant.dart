@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:task_management/core/color/color.dart';
+import 'package:task_management/core/constant/Assetimages.dart';
+import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:uuid/uuid.dart';
 
 class ProgressView extends StatelessWidget {
@@ -26,6 +29,31 @@ class ProgressView extends StatelessWidget {
       ),
     );
   }
+}
+
+void showSuccessDialog({String? title, String? subtext}) {
+  Get.defaultDialog(
+    title: '',
+    titlePadding: EdgeInsets.zero,
+    barrierDismissible: false,
+    contentPadding: EdgeInsets.zero,
+    content: Column(
+      children: [
+        SvgPicture.asset(AppAssetImage.toastNewIcon),
+        const SizedBox(height: 10),
+        CommonText(
+          text: title,
+          fontSize: 17,
+          fontWeight: FontWeight.w500,
+        ),
+        const SizedBox(height: 10),
+        CommonText(
+          text: subtext,
+          color: AppColor.darkGrey,
+        ),
+      ],
+    ),
+  );
 }
 
 customIndicator() {
