@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/screens/rating_screen.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
@@ -9,6 +10,7 @@ import '../core/color/color.dart';
 import '../providers/Authentication/auth_provider.dart';
 import '../providers/Authentication/logout_provider.dart';
 import 'change_password.dart';
+import 'edit_profile.dart';
 import 'login_Screen.dart';
 
 class ProfileScreen extends StatefulWidget {

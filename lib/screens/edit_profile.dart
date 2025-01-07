@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_management/core/color/color.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
 
+import '../providers/profile/edit_profile_provider.dart';
+
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => EditProfileProvider(),
+      child: EditProfileWidget(),
+    );
+  }
+}
+
+class EditProfileWidget extends StatelessWidget {
+  const EditProfileWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    final TextEditingController _firstNameController = TextEditingController();
+    final TextEditingController _lastNameController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -36,19 +59,23 @@ class EditProfile extends StatelessWidget {
                 clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
               ),
               const SizedBox(height: 20),
-              const CommonTextFieldBorder(
+               CommonTextFieldBorder(
+                 con: _firstNameController,
                 hintText: "First Name",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 10),
-              const CommonTextFieldBorder(
+               CommonTextFieldBorder(
+                 con: _lastNameController,
                 hintText: "Last Name",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
               ),
               const SizedBox(height: 10),
-              const CommonTextFieldBorder(
+               CommonTextFieldBorder(
+                 readOnly: true,
+                con: _emailController,
                 hintText: "Email Address",
                 hintTextColor: AppColor.primaryColor,
                 borderColor: AppColor.primaryColor,
@@ -56,7 +83,9 @@ class EditProfile extends StatelessWidget {
               const SizedBox(height: 20),
               CommonButton(
                 label: "Edit Profile",
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 labelColor: AppColor.white,
               ),
             ],

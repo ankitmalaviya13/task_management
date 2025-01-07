@@ -25,4 +25,49 @@ class ProfileApiService extends ApiService {
       );
     }
   }
+
+  Future<Response> changePassword({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await post(
+        AppUrl.changePassword,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } catch (e) {
+      print("fskfhsfkjshfkdf");
+      print(e.toString());
+
+      return Response(
+        requestOptions: RequestOptions(),
+        statusCode: 0,
+        statusMessage: e.toString(),
+      );
+    }
+  }
+
+  Future<Response> editProfile({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await put(
+        AppUrl.updateUser,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } catch (e) {
+      print("fskfhsfkjshfkdf");
+      print(e.toString());
+
+      return Response(
+        requestOptions: RequestOptions(),
+        statusCode: 0,
+        statusMessage: e.toString(),
+      );
+    }
+  }
+
 }

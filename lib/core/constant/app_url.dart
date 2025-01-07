@@ -2,7 +2,7 @@ class AppUrl {
   AppUrl._();
 
   // base url
-  static const String baseUrl = "http://192.168.29.28:8585";
+  static const String baseUrl = "http://192.168.0.3:8585";
 
   // receiveTimeout
   static const Duration receiveTimeout = Duration(minutes: 2);
@@ -16,5 +16,7 @@ class AppUrl {
   static const String verifyOtp = '/api/user/verifyOtp';
   static const String resetPassword = '/api/user/resetPassword';
   static const String logout = '/api/user/logout';
+  static const String updateUser = '/api/user';
+  static const String changePassword = '/api/user/changePassword';
   static const String rate = '/api/rate';
 }
