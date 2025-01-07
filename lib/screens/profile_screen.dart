@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:task_management/screens/rating_screen.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
@@ -105,7 +104,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               CommonButton(
                 label: "Edit Profile",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ));
+                },
                 labelColor: AppColor.white,
               ),
               const SizedBox(
