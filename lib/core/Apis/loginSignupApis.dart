@@ -8,10 +8,10 @@ import '../constant/constant.dart';
 class LoginSignupApi {
   final ApiService _apiService = ApiService();
 
-  var useToken;
+  var token;
 
   LoginSignupApi() {
-    useToken = box.read(ConstantsVariables.token);
+    token = box.read(ConstantsVariables.token);
   }
 
   Future<Response> login({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {

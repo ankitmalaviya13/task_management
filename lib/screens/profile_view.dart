@@ -122,11 +122,12 @@ class ProfileView extends GetView {
 
   logoutApi() async {
     isLogOutLoading.value = true;
+    String token = box.read(ConstantsVariables.token) ?? "";
     final response = await loginSignupApi.logout(
-      headers: {'Authorization': 'Bearer ${ConstantsVariables.token}'},
+      headers: {'Authorization': '$token'},
     );
     print("Token");
-    print(ConstantsVariables.token);
+    print(token);
     isLogOutLoading.value = false;
     print(response);
     if (response.statusCode == 200) {
