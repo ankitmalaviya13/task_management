@@ -2,7 +2,7 @@ class AppUrl {
   AppUrl._();
 
   // base url
-  static const String baseUrl = "http://192.168.0.3:8585";
+  static const String baseUrl = "http://192.168.29.28:8585";
 
   // receiveTimeout
   static const Duration receiveTimeout = Duration(minutes: 2);

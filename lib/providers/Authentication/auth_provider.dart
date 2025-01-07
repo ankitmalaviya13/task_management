@@ -4,13 +4,6 @@ import '../../core/constant/Localvariables.dart';
 import '../../services/Local/local_data_service.dart';
 
 class AuthProvider with ChangeNotifier {
-  // static final AuthProvider _instance = AuthProvider._internal();
-  //
-  // factory AuthProvider() {
-  //   return _instance;
-  // }
-  //
-  // AuthProvider._internal();
   bool _isAuthenticated = false;
   String? _authToken;
   String? _userId;
@@ -27,6 +20,7 @@ class AuthProvider with ChangeNotifier {
   String? get lastName => _lastName;
   String? get email => _email;
   String? get profilePic => _profilePic;
+
   String? get name {
     return "${_firstName} ${_lastName}";
   }

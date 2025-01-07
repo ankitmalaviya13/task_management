@@ -44,6 +44,7 @@ class LoginProvider extends ChangeNotifier {
           lastName: data.user?.lastName ?? "",
           profilePic: data.user?.profilepic ?? "",
         );
+        Toasty.showtoast(data.message.toString());
 
         setLoading(false);
         return null;
