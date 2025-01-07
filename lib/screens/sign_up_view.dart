@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_management/core/constant/constant.dart';
 import 'package:task_management/screens/controllers/login_signUp_controller.dart';
-import 'package:task_management/screens/login_view.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
@@ -196,12 +195,7 @@ class SignUpView extends GetView<LoginSignupController> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginView(),
-                                ),
-                              );
+                              controller.onTapWelcomeLogin();
                             },
                             child: RichText(
                               textAlign: TextAlign.center,

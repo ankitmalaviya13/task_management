@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:task_management/core/Apis/loginSignupApis.dart';
 import 'package:task_management/core/Models/RateModel.dart';
 import 'package:task_management/core/constant/constant.dart';
-import 'package:task_management/screens/Routes/app_pages.dart';
 
 class BottomBarController extends GetxController {
   LoginSignupApi loginSignupApi = LoginSignupApi();
@@ -40,29 +39,6 @@ class BottomBarController extends GetxController {
         Toasty.showtoast(data.message.toString());
         submit.value = false;
       }
-    }
-  }
-
-  logoutApi() async {
-    isLogOutLoading.value = true;
-    final response = await loginSignupApi.logout(
-      headers: {'Authorization': 'Bearer ${loginSignupApi.useToken}'},
-    );
-    isLogOutLoading.value = false;
-    print(response);
-    if (response.statusCode == 200) {
-      if (response.data["status"] == true) {
-        isLogOutLoading.value = false;
-        box.erase();
-        Get.toNamed(Routes.LOGIN_SIGNUP);
-      } else {
-        isLogOutLoading.value = false;
-        Toasty.showtoast(response.data["message"].toString());
-      }
-    } else {
-      box.erase();
-      isLogOutLoading.value = false;
-      Toasty.showtoast(response.statusMessage.toString());
     }
   }
 }

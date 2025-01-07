@@ -120,7 +120,7 @@ class LoginSignupApi {
   //
   Future<Response> logout({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
     try {
-      final Response response = await _apiService.get(
+      final Response response = await _apiService.delete(
         AppUrl.logOut,
         options: Options(headers: headers),
       );
@@ -161,6 +161,7 @@ class LoginSignupApi {
       return errorResponse;
     }
   }
+
   //
   // Future<Response> userDetailUpdate({data, Map<String, dynamic>? headers, userId}) async {
   //   try {

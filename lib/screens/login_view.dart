@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_management/core/color/color.dart';
 import 'package:task_management/core/constant/constant.dart';
-import 'package:task_management/screens/Routes/app_pages.dart';
 import 'package:task_management/screens/controllers/login_signUp_controller.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield_border.dart';
-
-import 'sign_up_view.dart';
 
 class LoginView extends GetView<LoginSignupController> {
   const LoginView({super.key});
@@ -106,7 +103,7 @@ class LoginView extends GetView<LoginSignupController> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(Routes.FORGOTPASSWORD);
+                                  controller.onTapWelcomeResetPassword();
                                 },
                                 child: const CommonText(
                                   text: "Forgot Password ?",
@@ -142,11 +139,7 @@ class LoginView extends GetView<LoginSignupController> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const SignUpView(),
-                                      ));
+                                  controller.onTapWelcomeSignup();
                                 },
                                 child: RichText(
                                   textAlign: TextAlign.center,

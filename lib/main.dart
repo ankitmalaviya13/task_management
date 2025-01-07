@@ -14,12 +14,6 @@ void main() async {
   runApp(MyApp());
 }
 
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await GetStorage.init();
-//   runApp(MyApp());
-// }
-
 Future<void> getDeviceInfo() async {
   DeviceInformationModel deviceInfo = await DeviceInfo().initPlatformState();
   // appVersion = deviceInfo.appVersion.toString();

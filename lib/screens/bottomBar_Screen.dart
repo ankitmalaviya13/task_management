@@ -22,7 +22,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     const HomeScreen(),
     const MyProjectScreen(),
     const ScheduleScreen(),
-    const ProfileView(),
+    ProfileView(),
   ];
 
   void _onItemTapped(int index) {

@@ -85,7 +85,7 @@ class Toasty {
 
 class ConstantsVariables {
   //api variables
-  static const String token = "token";
+  static const String token = "UserToken";
   static const String userId = "userId";
   static const String fullName = "name";
   static const String firstName = "firstName";

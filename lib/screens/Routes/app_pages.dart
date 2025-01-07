@@ -26,7 +26,7 @@ class AppPages {
       // binding: SplashBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN_SIGNUP,
+      name: _Paths.SIGNUP,
       page: () => const SignUpView(),
       // binding: SplashBinding(),
     ),

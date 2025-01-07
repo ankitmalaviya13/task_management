@@ -35,8 +35,7 @@ class LoginSignupController extends GetxController {
   RxBool obSecurePassword = true.obs;
   RxBool obSecureConfirmPassword = true.obs;
   RxBool isResend = false.obs;
-  RxInt passReq = 0.obs;
-  String? token;
+  RxInt passReq = 1.obs;
 
   storedata({token, userId, email, firstName, lastName}) {
     box.write(ConstantsVariables.token, token);
@@ -60,15 +59,18 @@ class LoginSignupController extends GetxController {
     if (response.statusCode == 200) {
       print(response.data);
       LoginModel data = LoginModel.fromJson(response.data);
+      box.write(ConstantsVariables.token, data.userToken ?? "");
+      print("Stored Token: ${ConstantsVariables.token}");
+      print("Token");
+      print(data.userToken);
       if (data.status == true) {
         storedata(
           userId: data.user.id ?? '',
           email: data.user.email ?? '',
           firstName: data.user.firstName ?? '',
           lastName: data.user.lastName ?? '',
+          token: data.userToken ?? "",
         );
-        print('token');
-        print(data.userToken);
       } else {
         isLoginLoading.value = false;
         Toasty.showtoast(data.message.toString());
@@ -107,30 +109,79 @@ class LoginSignupController extends GetxController {
     }
   }
 
+  onTapWelcomeSignup() {
+    passReq = 0.obs;
+    Get.toNamed(Routes.SIGNUP);
+  }
+
+  onTapWelcomeLogin() {
+    passReq = 1.obs;
+    Get.toNamed(Routes.LOGIN_SIGNUP);
+  }
+
+  onTapWelcomeResetPassword() {
+    passReq = 2.obs;
+    Get.toNamed(Routes.FORGOTPASSWORD);
+  }
+
   verifyOtp() async {
     isVerifyPinLoading.value = true;
+
     final response = await loginSignupApi.verifyOtp(
       data: {
         'email': emailController.text,
-        'pass_req': 1,
+        'pass_req': passReq.value,
         'otp': otpController.text,
       },
     );
+
     print(response);
+    print("PASS REQ VALUE");
+    print(passReq.value);
     if (response.statusCode == 200) {
       VerifyModel data = VerifyModel.fromJson(response.data);
-      if (data.status == true) {
+      if (data.status == 1) {
         isVerifyPinLoading.value = false;
+        if (passReq.value == 2) {
+          Get.toNamed(Routes.RESETPASSWORD);
+        } else {
+          Get.offAllNamed(Routes.BOTTOMBAR);
+        }
       } else {
         isVerifyPinLoading.value = false;
         Toasty.showtoast(data.message.toString());
-        Get.toNamed(Routes.RESETPASSWORD);
       }
     } else {
       isVerifyPinLoading.value = false;
       Toasty.showtoast(response.statusMessage.toString());
     }
   }
+
+  // verifyOtp() async {
+  //   isVerifyPinLoading.value = true;
+  //   final response = await loginSignupApi.verifyOtp(
+  //     data: {
+  //       'email': emailController.text,
+  //       'pass_req': passReq.value,
+  //       'otp': otpController.text,
+  //     },
+  //   );
+  //   print(response);
+  //   print("PASS REQ VALUE");
+  //   print(passReq.value);
+  //   if (response.statusCode == 200) {
+  //     VerifyModel data = VerifyModel.fromJson(response.data);
+  //     if (data.status == true) {
+  //       isVerifyPinLoading.value = false;
+  //     } else {
+  //       isVerifyPinLoading.value = false;
+  //       Toasty.showtoast(data.message.toString());
+  //     }
+  //   } else {
+  //     isVerifyPinLoading.value = false;
+  //     Toasty.showtoast(response.statusMessage.toString());
+  //   }
+  // }
 
   forgotPassword() async {
     isForgotLoading.value = true;
@@ -171,7 +222,6 @@ class LoginSignupController extends GetxController {
 
   ResetPassword() async {
     isResetLoading.value = true;
-
     final response = await loginSignupApi.resetPassword(
       data: {
         'email': emailController.text,
@@ -184,16 +234,16 @@ class LoginSignupController extends GetxController {
 
     if (response.statusCode == 200) {
       final data = ChangePasswordModel.fromJson(response.data);
-
       if (data.status == true) {
-        showSuccessDialog(
-          title: "Password Changed Successfully",
-          subtext: data.message ?? "You can now log in with your new password.",
-        );
-        await Future.delayed(const Duration(seconds: 2));
         Get.toNamed(Routes.BOTTOMBAR);
+        // showSuccessDialog(
+        //   title: "Password Changed Successfully",
+        //   subtext: data.message ?? "You can now log in with your new password.",
+        // );
+        // await Future.delayed(const Duration(seconds: 2));
       } else {
-        Toasty.showtoast(data.message ?? "Something went wrong.");
+        Toasty.showtoast(data.message ?? "Password Changed Successfully");
+        Get.toNamed(Routes.BOTTOMBAR);
       }
     } else {
       Toasty.showtoast(response.statusMessage ?? "An error occurred.");
