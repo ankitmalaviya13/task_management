@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:task_management/screens/bottomBar_Screen.dart';
 import 'package:task_management/screens/forgot_password_view.dart';
 import 'package:task_management/screens/login_view.dart';
+import 'package:task_management/screens/rating_view.dart';
 import 'package:task_management/screens/reset_password_view.dart';
 import 'package:task_management/screens/sign_up_view.dart';
 import 'package:task_management/screens/splash_Screen.dart';
@@ -48,6 +49,11 @@ class AppPages {
     GetPage(
       name: _Paths.RESETPASSWORD,
       page: () => const ResetPasswordView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.RATING,
+      page: () => RatingView(),
       // binding: SplashBinding(),
     ),
   ];

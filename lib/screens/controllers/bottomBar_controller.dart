@@ -18,12 +18,16 @@ class BottomBarController extends GetxController {
   rateUS() async {
     isRateUSLoading.value = true;
     submit.value = true;
+    String token = box.read(ConstantsVariables.token) ?? "";
     final response = await loginSignupApi.rateUs(
+      headers: {'Authorization': '$token'},
       data: {
         "rate": ratingValue.value?.toInt() ?? 1,
         "rateText": rateUsReviewController.text,
       },
     );
+    print("Token");
+    print(token);
     if (response.statusCode == 200) {
       RateModel data = RateModel.fromJson(response.data);
       if (data.status == true) {

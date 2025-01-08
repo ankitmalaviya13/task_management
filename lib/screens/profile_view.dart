@@ -6,7 +6,6 @@ import 'package:task_management/core/constant/constant.dart';
 import 'package:task_management/screens/Routes/app_pages.dart';
 import 'package:task_management/screens/change_password.dart';
 import 'package:task_management/screens/editProfile.dart';
-import 'package:task_management/screens/rating_view.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
@@ -27,7 +26,8 @@ class ProfileView extends GetView {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => Changepassword()));
           break;
         case 1:
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => RatingView()));
+          Get.toNamed(Routes.RATING);
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RatingView()));
           break;
         case 2:
           showDialog(
@@ -50,9 +50,7 @@ class ProfileView extends GetView {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               cachedNetworkImage(
                 circular: 100.0,
                 image: "https://picsum.photos/200/300",
@@ -61,24 +59,18 @@ class ProfileView extends GetView {
                 fit: BoxFit.fill,
                 clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               const CommonText(
                 text: "Shane Whatson",
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
-              const SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 5),
               const CommonText(
                 text: "Shanewhatson@gmail.com",
                 fontSize: 18,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               CommonButton(
                 label: "Edit Profile",
                 onPressed: () {
