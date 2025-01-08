@@ -27,7 +27,6 @@ class ProfileView extends GetView {
           break;
         case 1:
           Get.toNamed(Routes.RATING);
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RatingView()));
           break;
         case 2:
           showDialog(

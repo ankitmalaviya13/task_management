@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:task_management/core/color/color.dart';
+import 'package:task_management/core/constant/constant.dart';
 import 'package:task_management/screens/controllers/bottomBar_controller.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
@@ -17,7 +18,7 @@ class RatingView extends GetView<BottomBarController> {
         builder: (logic) {
           return Scaffold(
             appBar: AppBar(),
-            body: SafeArea(
+            body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
@@ -53,15 +54,22 @@ class RatingView extends GetView<BottomBarController> {
                       maxLine: 3,
                     ),
                     const SizedBox(height: 16),
-                    const SizedBox(height: 50),
-                    CommonButton(
-                      label: "Submit Feedback",
-                      labelColor: AppColor.white,
-                      labelSize: 17,
-                      onPressed: () {
-                        controller.rateUS();
-                      },
-                    ),
+                    Obx(() => controller.submit.value == false
+                        ? CommonButton(
+                            width: 350,
+                            labelSize: 20,
+                            labelWeight: FontWeight.w400,
+                            label: "Submit",
+                            labelColor: AppColor.white,
+                            onPressed: () {
+                              if (controller.rateUsReviewController.value.text.trim().isNotEmpty) {
+                                controller.rateUS();
+                              } else {
+                                Toasty.showtoast("This Field is Empty");
+                              }
+                            },
+                          )
+                        : ProgressView(color: AppColor.primaryColor)),
                   ],
                 ),
               ),
