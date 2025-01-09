@@ -22,9 +22,7 @@ class ForgotPasswordView extends GetView<LoginSignupController> {
             children: [
               const SizedBox(height: 50),
               InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  onTap: () => controller.onTapForgetPasswordBack(),
                   child: const Icon(Icons.arrow_back_ios_new_rounded)),
               const SizedBox(height: 25),
               const Row(
