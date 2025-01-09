@@ -4,8 +4,6 @@ import 'package:task_management/core/Apis/loginSignupApis.dart';
 import 'package:task_management/core/color/color.dart';
 import 'package:task_management/core/constant/constant.dart';
 import 'package:task_management/screens/Routes/app_pages.dart';
-import 'package:task_management/screens/change_password.dart';
-import 'package:task_management/screens/editProfile.dart';
 import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_button.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
@@ -23,7 +21,7 @@ class ProfileView extends GetView {
     onListItemTap(index) {
       switch (index) {
         case 0:
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Changepassword()));
+          Get.toNamed(Routes.CHANGEPASSWORD);
           break;
         case 1:
           Get.toNamed(Routes.RATING);
@@ -73,17 +71,11 @@ class ProfileView extends GetView {
               CommonButton(
                 label: "Edit Profile",
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProfile(),
-                      ));
+                  Get.toNamed(Routes.EDITPROFILE);
                 },
                 labelColor: AppColor.white,
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              const SizedBox(height: 50),
               Expanded(
                 child: ListView.builder(
                     itemCount: 3,

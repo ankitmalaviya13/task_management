@@ -162,26 +162,44 @@ class LoginSignupApi {
     }
   }
 
-  //
-  // Future<Response> userDetailUpdate({data, Map<String, dynamic>? headers, userId}) async {
-  //   try {
-  //     final Response response = await _apiService.put(
-  //       "${AppUrl.signUp}/${userId}/",
-  //       data: data,
-  //       options: Options(headers: headers),
-  //     );
-  //     print("dsajdkhsadasda ${response.data}");
-  //     return response;
-  //   } on DioException catch (e) {
-  //     print(e.toString());
-  //     print("sdfsdhfskfsklfjljlk");
-  //     Toasty.showtoast(ApiException.fromDioError(e).message.toString());
-  //     Response errorResponse = Response(
-  //       requestOptions: RequestOptions(),
-  //       statusMessage: e.response?.statusCode == 429 ? "" : null,
-  //       statusCode: e.response?.statusCode ?? 0,
-  //     );
-  //     return errorResponse;
-  //   }
-  // }
+  Future<Response> changePassword({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await _apiService.post(
+        AppUrl.changePassword,
+        data: data,
+        options: Options(headers: headers),
+      );
+      return response;
+    } on DioException catch (e) {
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
+
+  Future<Response> editProfileUpdate({data, Map<String, dynamic>? headers, userId}) async {
+    try {
+      final Response response = await _apiService.put(
+        AppUrl.editProfile,
+        data: data,
+        options: Options(headers: headers),
+      );
+      print("dsajdkhsadasda ${response.data}");
+      return response;
+    } on DioException catch (e) {
+      print(e.toString());
+      print("sdfsdhfskfsklfjljlk");
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
 }

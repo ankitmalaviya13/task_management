@@ -17,7 +17,13 @@ class RatingView extends GetView<BottomBarController> {
         init: BottomBarController(),
         builder: (logic) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(Icons.arrow_back_ios_new_rounded)),
+            ),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -25,7 +31,6 @@ class RatingView extends GetView<BottomBarController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 30),
                     const CommonText(
                       text: "Rate Us",
                       fontSize: 28,

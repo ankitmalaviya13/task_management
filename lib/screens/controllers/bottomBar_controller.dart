@@ -30,7 +30,7 @@ class BottomBarController extends GetxController {
     print(token);
     if (response.statusCode == 200) {
       RateModel data = RateModel.fromJson(response.data);
-      if (data.status == true) {
+      if (data.status == 1) {
         isRateLoading.value = false;
         rateUsReviewController.clear();
         ratingValue.value = 0.0;

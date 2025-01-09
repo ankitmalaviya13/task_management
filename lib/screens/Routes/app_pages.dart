@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/change_password_view.dart';
+import 'package:task_management/screens/edit_profile_view.dart';
 import 'package:task_management/screens/forgot_password_view.dart';
 import 'package:task_management/screens/login_view.dart';
 import 'package:task_management/screens/rating_view.dart';
@@ -54,6 +56,16 @@ class AppPages {
     GetPage(
       name: _Paths.RATING,
       page: () => RatingView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGEPASSWORD,
+      page: () => ChangePasswordView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDITPROFILE,
+      page: () => EditProfileView(),
       // binding: SplashBinding(),
     ),
   ];
