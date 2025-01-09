@@ -45,23 +45,27 @@ class AuthProvider with ChangeNotifier {
 
   // Log in method
   Future<void> loggedIn({
-    required String token,
+    String? token,
     required String userId,
     required String firstName,
     required String lastName,
     required String email,
     required String profilePic,
   }) async {
+    if (token != null) {
+      print("fdsiufsdhyfksfksdjfh");
+      print(token);
+      _authToken = token;
+      await StorageService().saveData(LocalVariables.token, token);
+    }
     _isAuthenticated = true;
-    _authToken = token;
+
     _userId = userId;
     _firstName = firstName;
     _lastName = lastName;
     _email = email;
     _profilePic = profilePic;
-    print("fdsiufsdhyfksfksdjfh");
-    print(token);
-    await StorageService().saveData(LocalVariables.token, token);
+
     await StorageService().saveData(LocalVariables.userId, userId);
     await StorageService().saveData(LocalVariables.firstName, firstName);
     await StorageService().saveData(LocalVariables.lastName, lastName);

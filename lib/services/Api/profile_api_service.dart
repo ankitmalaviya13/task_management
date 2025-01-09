@@ -48,7 +48,7 @@ class ProfileApiService extends ApiService {
     }
   }
 
-  Future<Response> editProfile({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+  Future<Response> editProfile({data, Map<String, dynamic>? headers}) async {
     try {
       final Response response = await put(
         AppUrl.updateUser,
@@ -69,5 +69,4 @@ class ProfileApiService extends ApiService {
       );
     }
   }
-
 }

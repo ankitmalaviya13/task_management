@@ -7,6 +7,7 @@ import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/logout_popup.dart';
 
 import '../core/color/color.dart';
+import '../core/constant/app_url.dart';
 import '../providers/Authentication/auth_provider.dart';
 import '../providers/Authentication/logout_provider.dart';
 import 'change_password.dart';
@@ -66,13 +67,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 20,
               ),
-              cachedNetworkImage(
-                circular: 100.0,
-                image: "https://picsum.photos/200/300",
-                height: 100.0,
-                width: 100.0,
-                fit: BoxFit.fill,
-                clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
+              Selector<AuthProvider, String?>(
+                selector: (context, provider) => provider.profilePic,
+                builder: (context, profilePic, _) {
+                  print("Loader rebuilt");
+                  return cachedNetworkImage(
+                    circular: 100.0,
+                    image: "${AppUrl.baseUrl}/${profilePic}",
+                    height: 100.0,
+                    width: 100.0,
+                    fit: BoxFit.fill,
+                    clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,

@@ -11,7 +11,7 @@ import '../../screens/widgets/toast.dart';
 import '../../services/Api/api_service.dart';
 import '../Authentication/auth_provider.dart';
 
-class EditProfileProvider extends ChangeNotifier {
+class AddProjectProvider extends ChangeNotifier {
   final ProfileApiService _profileApiService = GetIt.instance<ProfileApiService>();
   final authProvider = GetIt.instance<AuthProvider>();
   String? _image;

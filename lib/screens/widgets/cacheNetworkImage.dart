@@ -47,7 +47,7 @@ Container cachedNetworkImage({
                 borderRadius: BorderRadius.circular(circular),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(placeholder ?? AppAssetImage.logo),
+                  image: AssetImage(placeholder ?? AppAssetImage.nouser),
                 ),
               ),
             ),
@@ -60,7 +60,7 @@ Container cachedNetworkImage({
             borderRadius: BorderRadius.circular(circular),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(placeholder ?? AppAssetImage.logo),
+              image: AssetImage(placeholder ?? AppAssetImage.nouser),
             ),
           ),
         ),

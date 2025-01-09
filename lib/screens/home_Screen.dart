@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:task_management/screens/myProject_Screen.dart';
 import 'package:task_management/screens/notification_screen.dart';
 import 'package:task_management/screens/today_Task.dart';
+import 'package:task_management/screens/widgets/cacheNetworkImage.dart';
 import 'package:task_management/screens/widgets/common_text.dart';
 import 'package:task_management/screens/widgets/common_textfield.dart';
 
 import '../core/color/color.dart';
+import '../core/constant/app_url.dart';
 import '../providers/Authentication/auth_provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,17 +26,19 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 50),
             Row(
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBNFUwQmH640OafdOvh-eIPRcB9ZeIBbYfew&s'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                Selector<AuthProvider, String?>(
+                  selector: (context, provider) => provider.profilePic,
+                  builder: (context, profilePic, _) {
+                    print("Loader rebuilt");
+                    return cachedNetworkImage(
+                      circular: 100.0,
+                      image: "${AppUrl.baseUrl}/${profilePic}",
+                      height: 40.0,
+                      width: 40.0,
+                      fit: BoxFit.fill,
+                      clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    );
+                  },
                 ),
                 const SizedBox(width: 10),
                 Column(
