@@ -202,4 +202,22 @@ class LoginSignupApi {
       return errorResponse;
     }
   }
+
+  Future<Response> userDetail({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await _apiService.get(
+        AppUrl.editProfile,
+        options: Options(headers: headers),
+      );
+      return response;
+    } on DioException catch (e) {
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
 }

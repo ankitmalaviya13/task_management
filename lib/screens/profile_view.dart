@@ -57,22 +57,20 @@ class ProfileView extends GetView {
                 clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
               ),
               const SizedBox(height: 20),
-              const CommonText(
-                text: "Shane Whatson",
+              CommonText(
+                text: box.read(ConstantsVariables.firstName),
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
               ),
               const SizedBox(height: 5),
-              const CommonText(
-                text: "Shanewhatson@gmail.com",
+              CommonText(
+                text: box.read(ConstantsVariables.email),
                 fontSize: 18,
               ),
               const SizedBox(height: 20),
               CommonButton(
                 label: "Edit Profile",
-                onPressed: () {
-                  Get.toNamed(Routes.EDITPROFILE);
-                },
+                onPressed: () => Get.toNamed(Routes.EDITPROFILE),
                 labelColor: AppColor.white,
               ),
               const SizedBox(height: 50),

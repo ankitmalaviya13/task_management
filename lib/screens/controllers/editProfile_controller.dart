@@ -12,6 +12,13 @@ class EditProfileController extends GetxController {
   TextEditingController emailController = TextEditingController();
 
   RxBool isLoading = false.obs;
+  Rx<User?> userDetail = Rx<User?>(null);
+
+  @override
+  void onInit() {
+    userDetailApi();
+    super.onInit();
+  }
 
   editProfileUpdateApi() async {
     isLoading.value = true;
@@ -33,17 +40,11 @@ class EditProfileController extends GetxController {
     if (response.statusCode == 200) {
       UserModel userModel = UserModel.fromJson(response.data);
       if (userModel.status == 1) {
-        // userDetail.value = userModel!.user!;
-        // profileFullNameController.text = userDetail.value!.fullName!;
-        // profileEmailController.text = userDetail.value!.email!;
-        // profileMobileNumberController.text = userDetail.value!.phone!.replaceAll(userDetail.value!.countryCode!, "");
-        // profileBirthDateController.text = "${DateFormat('yyyy-MM-dd').format(userDetail.value!.birthDate!) ?? ""}";
-        // profileBirthTimeController.text = "${userDetail.value?.birthTime ?? ""}";
-        // countryCode.value = userDetail.value!.countryCode!;
-        // pickedFile.value = "";
-        // profilePic.value = "${userDetail.value?.profilePic ?? " "}";
-        // readOnly.value = true;
-        // deleteImageFromCache();
+        userDetail.value = userModel.user;
+        firstNameController.text = userDetail.value!.firstName;
+        lastNameController.text = userDetail.value!.lastName;
+        emailController.text = userDetail.value!.email;
+
         // storedata(
         //   name: userDetail.value!.fullName!,
         //   email: userDetail.value!.email!,
@@ -54,6 +55,51 @@ class EditProfileController extends GetxController {
         isLoading.value = false;
         Toasty.showtoast(userModel.message.toString());
         Get.back();
+      } else {
+        Toasty.showtoast(userModel.message.toString());
+        isLoading.value = false;
+      }
+    } else {
+      isLoading.value = false;
+      Toasty.showtoast(response.statusMessage.toString());
+    }
+  }
+
+  userDetailApi() async {
+    isLoading.value = true;
+    await Future.delayed(Duration(seconds: 3));
+    String token = box.read(ConstantsVariables.token) ?? "";
+    final response = await loginSignupApi.userDetail(
+      headers: {'Authorization': token},
+    );
+    print("token");
+    print(token);
+    print("response");
+    print(response);
+    if (response.statusCode == 200) {
+      UserModel userModel = UserModel.fromJson(response.data);
+      if (userModel.status == 1) {
+        userDetail.value = userModel.user;
+        firstNameController.text = userDetail.value!.firstName;
+        lastNameController.text = userDetail.value!.lastName;
+        emailController.text = userDetail.value!.email;
+        // userDetail.value = userModel!.user!;
+        // profileFullNameController.text = userDetail.value!.fullName!;
+        // profileEmailController.text = userDetail.value!.email!;
+        // number.value = PhoneNumber(
+        //     countryISOCode: "IN",
+        //     countryCode: userDetail.value!.countryCode!,
+        //     number: userDetail.value!.phone!.replaceAll(userDetail.value!.countryCode!, ""));
+        // print(number);
+        // print(number?.value?.completeNumber);
+        // profileBirthDateController.text = "${DateFormat('yyyy-MM-dd').format(userDetail.value!.birthDate!) ?? ""}";
+        // profileBirthTimeController.text = "${userDetail.value?.birthTime ?? ""}";
+        // countryCode.value = "${userDetail.value?.countryCode ?? " + 91"}";
+        // profilePic.value = "${userDetail.value?.profilePic ?? " "}";
+        // print(profilePic.value);
+        update();
+        // number.refresh();
+        isLoading.value = false;
       } else {
         Toasty.showtoast(userModel.message.toString());
         isLoading.value = false;
