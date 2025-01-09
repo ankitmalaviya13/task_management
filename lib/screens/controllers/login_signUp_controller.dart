@@ -19,6 +19,8 @@ class LoginSignupController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController otpController = TextEditingController();
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
 
   final loginFormKey = GlobalKey<FormState>();
   final signUpFormKey = GlobalKey<FormState>();
@@ -32,10 +34,13 @@ class LoginSignupController extends GetxController {
   RxBool isForgotLoading = false.obs;
   RxBool isForgotPinLoading = false.obs;
   RxBool isResetLoading = false.obs;
+  RxBool isChangePasswordLoading = false.obs;
   RxBool obSecurePassword = true.obs;
   RxBool obSecureConfirmPassword = true.obs;
+  RxBool REobSecureConfirmPassword = true.obs;
   RxBool isResend = false.obs;
   RxInt passReq = 1.obs;
+  bool isSkip = false;
 
   storedata({token, userId, email, firstName, lastName}) {
     box.write(ConstantsVariables.token, token);
@@ -43,6 +48,86 @@ class LoginSignupController extends GetxController {
     box.write(ConstantsVariables.email, email);
     box.write(ConstantsVariables.firstName, firstName);
     box.write(ConstantsVariables.lastName, lastName);
+  }
+
+  onTapLoginBack() {
+    reset("loginback");
+    if (isSkip == false) {
+      Get.back();
+    }
+  }
+
+  onTapSignupBack() {
+    reset("signupback");
+    Get.back();
+  }
+
+  onTapForgetPasswordBack() {
+    reset("forgotpassword");
+    Get.back();
+  }
+
+  onTapForgetPinBack() {
+    reset("forgotpinback");
+    Get.back();
+  }
+
+  onTapForgotPin() async {
+    if (forgotPinKey.currentState!.validate()) {
+      isForgotPinLoading.value = true;
+      await Future.delayed(const Duration(seconds: 2));
+      isForgotPinLoading.value = false;
+      verifyOtp();
+    }
+  }
+
+  onTapChange() async {
+    if (resetFormKey.currentState!.validate()) {
+      changePassword();
+    }
+  }
+
+  reset(tap) {
+    switch (tap) {
+      case "signupnow":
+        print("signupnow");
+        emailController.clear();
+        passwordController.clear();
+      case "loginnow":
+        print("loginnow");
+        emailController.clear();
+        passwordController.clear();
+        confirmPasswordController.clear();
+      case "loginback":
+        print("loginback");
+        emailController.clear();
+        passwordController.clear();
+      case "changepassword":
+        print("changepassword");
+        emailController.clear();
+        passwordController.clear();
+        confirmPasswordController.clear();
+        otpController.clear();
+      case "forgotpassword":
+        print("forgotpassword");
+        passwordController.clear();
+      case "forgotpinback":
+        print("forgotpinback");
+        isResend.value = false;
+        otpController.clear();
+      case "changepasswordback":
+        print("changepasswordback");
+        passwordController.clear();
+        confirmPasswordController.clear();
+      case "signupback":
+        print("signupback");
+        firstNameController.clear();
+        lastNameController.clear();
+        emailController.clear();
+        passwordController.clear();
+        confirmPasswordController.clear();
+      default:
+    }
   }
 
   loginApi() async {
@@ -157,32 +242,6 @@ class LoginSignupController extends GetxController {
     }
   }
 
-  // verifyOtp() async {
-  //   isVerifyPinLoading.value = true;
-  //   final response = await loginSignupApi.verifyOtp(
-  //     data: {
-  //       'email': emailController.text,
-  //       'pass_req': passReq.value,
-  //       'otp': otpController.text,
-  //     },
-  //   );
-  //   print(response);
-  //   print("PASS REQ VALUE");
-  //   print(passReq.value);
-  //   if (response.statusCode == 200) {
-  //     VerifyModel data = VerifyModel.fromJson(response.data);
-  //     if (data.status == true) {
-  //       isVerifyPinLoading.value = false;
-  //     } else {
-  //       isVerifyPinLoading.value = false;
-  //       Toasty.showtoast(data.message.toString());
-  //     }
-  //   } else {
-  //     isVerifyPinLoading.value = false;
-  //     Toasty.showtoast(response.statusMessage.toString());
-  //   }
-  // }
-
   forgotPassword() async {
     isForgotLoading.value = true;
     isForgotPinLoading.value = true;
@@ -247,6 +306,36 @@ class LoginSignupController extends GetxController {
       }
     } else {
       Toasty.showtoast(response.statusMessage ?? "An error occurred.");
+    }
+  }
+
+  changePassword() async {
+    isChangePasswordLoading.value = true;
+    String token = box.read(ConstantsVariables.token) ?? "";
+    final response = await loginSignupApi.changePassword(
+      headers: {'Authorization': '$token'},
+      data: {
+        'oldpassword': oldPasswordController.text,
+        "newpassword": newPasswordController.text,
+      },
+    );
+    print("Fsdlkfjsdlkjfldksf");
+    print(response);
+    if (response.statusCode == 200) {
+      ChangePasswordModel data = ChangePasswordModel.fromJson(response.data);
+      if (data.status == 1) {
+        isChangePasswordLoading.value = false;
+        Toasty.showtoast(data.message.toString());
+        box.erase();
+        Get.offAllNamed(Routes.BOTTOMBAR);
+      } else {
+        isChangePasswordLoading.value = false;
+        Toasty.showtoast(data.message.toString());
+        Get.offAllNamed(Routes.LOGIN_SIGNUP);
+      }
+    } else {
+      isChangePasswordLoading.value = false;
+      Toasty.showtoast(response.statusMessage.toString());
     }
   }
 
