@@ -4,6 +4,7 @@ import 'package:task_management/screens/change_password_view.dart';
 import 'package:task_management/screens/edit_profile_view.dart';
 import 'package:task_management/screens/forgot_password_view.dart';
 import 'package:task_management/screens/login_view.dart';
+import 'package:task_management/screens/project_view.dart';
 import 'package:task_management/screens/rating_view.dart';
 import 'package:task_management/screens/reset_password_view.dart';
 import 'package:task_management/screens/sign_up_view.dart';
@@ -66,6 +67,11 @@ class AppPages {
     GetPage(
       name: _Paths.EDITPROFILE,
       page: () => EditProfileView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROJECT,
+      page: () => ProjectView(),
       // binding: SplashBinding(),
     ),
   ];

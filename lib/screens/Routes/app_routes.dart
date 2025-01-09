@@ -12,6 +12,7 @@ abstract class Routes {
   static const RATING = _Paths.RATING;
   static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
   static const EDITPROFILE = _Paths.EDITPROFILE;
+  static const PROJECT = _Paths.PROJECT;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const RATING = '/rating';
   static const CHANGEPASSWORD = '/changePassword';
   static const EDITPROFILE = '/editProfile';
+  static const PROJECT = '/project';
 }
