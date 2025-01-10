@@ -33,47 +33,59 @@ class EditProfileView extends GetView<EditProfileController> {
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                    child: Column(
-                      children: [
-                        cachedNetworkImage(
-                          circular: 100.0,
-                          image: "https://picsum.photos/200/300",
-                          height: 100.0,
-                          width: 100.0,
-                          fit: BoxFit.fill,
-                          clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        const SizedBox(height: 20),
-                        CommonTextFieldBorder(
-                          con: controller.firstNameController,
-                          hintText: "First Name",
-                          hintTextColor: AppColor.primaryColor,
-                          borderColor: AppColor.primaryColor,
-                        ),
-                        const SizedBox(height: 10),
-                        CommonTextFieldBorder(
-                          con: controller.lastNameController,
-                          hintText: "Last Name",
-                          hintTextColor: AppColor.primaryColor,
-                          borderColor: AppColor.primaryColor,
-                        ),
-                        const SizedBox(height: 10),
-                        CommonTextFieldBorder(
-                          con: controller.emailController,
-                          hintText: "Email Address",
-                          hintTextColor: AppColor.primaryColor,
-                          borderColor: AppColor.primaryColor,
-                        ),
-                        const SizedBox(height: 20),
-                        CommonButton(
-                          label: "Edit Profile",
-                          onPressed: () {
-                            print("abc");
-                            controller.editProfileUpdateApi();
-                          },
-                          labelColor: AppColor.white,
-                        ),
-                      ],
+                    child: Form(
+                      key: controller.editProfileFormKey,
+                      child: Column(
+                        children: [
+                          cachedNetworkImage(
+                            circular: 100.0,
+                            image: "https://picsum.photos/200/300",
+                            height: 100.0,
+                            width: 100.0,
+                            fit: BoxFit.fill,
+                            clipRRectBorderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          ),
+                          const SizedBox(height: 20),
+                          CommonTextFieldBorder(
+                            con: controller.firstNameController,
+                            hintText: "First Name",
+                            hintTextColor: AppColor.primaryColor,
+                            borderColor: AppColor.primaryColor,
+                            validator: (v) {
+                              return controller.editProfileValidation("firstName", v);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CommonTextFieldBorder(
+                            con: controller.lastNameController,
+                            hintText: "Last Name",
+                            hintTextColor: AppColor.primaryColor,
+                            borderColor: AppColor.primaryColor,
+                            validator: (v) {
+                              return controller.editProfileValidation("lastname", v);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CommonTextFieldBorder(
+                            con: controller.emailController,
+                            hintText: "Email Address",
+                            hintTextColor: AppColor.primaryColor,
+                            borderColor: AppColor.primaryColor,
+                            validator: (v) {
+                              return controller.editProfileValidation("email", v);
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          CommonButton(
+                            label: "Edit Profile",
+                            onPressed: () {
+                              controller.onTapKeyboard(context);
+                              controller.onTapEditProfile();
+                            },
+                            labelColor: AppColor.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

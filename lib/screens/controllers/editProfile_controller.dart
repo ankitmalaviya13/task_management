@@ -13,11 +13,22 @@ class EditProfileController extends GetxController {
 
   RxBool isLoading = false.obs;
   Rx<User?> userDetail = Rx<User?>(null);
+  final editProfileFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
     userDetailApi();
     super.onInit();
+  }
+
+  onTapKeyboard(context) {
+    FocusScope.of(context).unfocus();
+  }
+
+  onTapEditProfile() async {
+    if (editProfileFormKey.currentState!.validate()) {
+      editProfileUpdateApi();
+    }
   }
 
   editProfileUpdateApi() async {
@@ -67,7 +78,7 @@ class EditProfileController extends GetxController {
 
   userDetailApi() async {
     isLoading.value = true;
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     String token = box.read(ConstantsVariables.token) ?? "";
     final response = await loginSignupApi.userDetail(
       headers: {'Authorization': token},
@@ -107,6 +118,36 @@ class EditProfileController extends GetxController {
     } else {
       isLoading.value = false;
       Toasty.showtoast(response.statusMessage.toString());
+    }
+  }
+
+  editProfileValidation(type, value) {
+    switch (type) {
+      case "firstName":
+        if (value.trim().isEmpty) {
+          return "First name is required";
+        }
+        if (value == firstNameController.text.isNotEmpty) {
+          return "Please enter valid name";
+        }
+      case "lastname":
+        if (value.trim().isEmpty) {
+          return "Last name is required";
+        }
+        if (value == lastNameController.text.isNotEmpty) {
+          return "Please enter valid name";
+        }
+      case "email":
+        if (value!.isEmpty) {
+          return "Email is required";
+        }
+        String pattern = r'^[^@]+@[^@]+\.[^@]+';
+        RegExp regex = RegExp(pattern);
+        if (!regex.hasMatch(value)) {
+          return "Please enter a valid email address";
+        }
+      default:
+        return null;
     }
   }
 }
