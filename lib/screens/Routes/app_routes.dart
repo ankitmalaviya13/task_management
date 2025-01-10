@@ -13,6 +13,7 @@ abstract class Routes {
   static const CHANGEPASSWORD = _Paths.CHANGEPASSWORD;
   static const EDITPROFILE = _Paths.EDITPROFILE;
   static const PROJECT = _Paths.PROJECT;
+  static const HOME = _Paths.HOME;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const CHANGEPASSWORD = '/changePassword';
   static const EDITPROFILE = '/editProfile';
   static const PROJECT = '/project';
+  static const HOME = '/home';
 }

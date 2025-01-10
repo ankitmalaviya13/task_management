@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:task_management/screens/bottomBar_Screen.dart';
+import 'package:task_management/screens/bottom_bar_view.dart';
 import 'package:task_management/screens/change_password_view.dart';
 import 'package:task_management/screens/edit_profile_view.dart';
 import 'package:task_management/screens/forgot_password_view.dart';
+import 'package:task_management/screens/home_view.dart';
 import 'package:task_management/screens/login_view.dart';
 import 'package:task_management/screens/project_view.dart';
 import 'package:task_management/screens/rating_view.dart';
@@ -36,7 +37,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOTTOMBAR,
-      page: () => const BottomBarScreen(),
+      page: () => BottomBarScreen(),
       // binding: SplashBinding(),
     ),
     GetPage(
@@ -72,6 +73,11 @@ class AppPages {
     GetPage(
       name: _Paths.PROJECT,
       page: () => ProjectView(),
+      // binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => HomeView(),
       // binding: SplashBinding(),
     ),
   ];
