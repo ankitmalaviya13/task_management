@@ -19,4 +19,5 @@ class AppUrl {
   static const String logOut = 'api/user/logout';
   static const String RateUs = 'api/rate';
   static const String editProfile = 'api/user';
+  static const String project = 'api/project';
 }

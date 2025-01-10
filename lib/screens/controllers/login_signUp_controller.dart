@@ -146,6 +146,7 @@ class LoginSignupController extends GetxController {
       LoginModel data = LoginModel.fromJson(response.data);
       box.write(ConstantsVariables.token, data.userToken ?? "");
       box.write(ConstantsVariables.firstName, data.user.firstName ?? "");
+      box.write(ConstantsVariables.lastName, data.user.lastName ?? "");
       box.write(ConstantsVariables.email, data.user.email ?? "");
       print("Stored Token: ${ConstantsVariables.token}");
       print("Token");
