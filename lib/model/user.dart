@@ -1,33 +1,41 @@
-class UserModel {
-  final String id;
-  final String name;
-  final String email;
-  final String token;
+import 'dart:convert';
 
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.token,
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
+
+class User {
+  String? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? profilepic;
+
+  User({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.profilepic,
   });
 
-  // Factory method to create UserModel from a Map (response from API)
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      token: json['token'],
-    );
-  }
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
-  // Method to convert UserModel to Map (for storage or API request)
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'token': token,
-    };
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["_id"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        email: json["email"],
+        profilepic: json["profilepic"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "profilepic": profilepic,
+      };
 }

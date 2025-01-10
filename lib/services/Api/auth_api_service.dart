@@ -169,4 +169,29 @@ class AuthApiService extends ApiService {
       );
     }
   }
+
+  Future<Response> getAllUsers({Map<String, dynamic>? data, Map<String, dynamic>? headers}) async {
+    try {
+      final Response response = await get(
+        AppUrl.getallusers,
+        queryParameters: data,
+        options: Options(headers: headers),
+      );
+      print(response);
+      print("Fdsfhsdfjkhsfkd");
+      return response;
+    } on DioException catch (e) {
+      print("Fdsfhsdfjkhsfkdfdsfsdfsdf");
+      print(e.toString());
+      print(e.response.toString());
+
+      Toasty.showtoast(ApiException.fromDioError(e).message.toString());
+      Response errorResponse = Response(
+        requestOptions: RequestOptions(),
+        statusMessage: e.response?.statusCode == 429 ? "" : null,
+        statusCode: e.response?.statusCode ?? 0,
+      );
+      return errorResponse;
+    }
+  }
 }

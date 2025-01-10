@@ -17,6 +17,8 @@ class AppUrl {
   static const String resetPassword = '/api/user/resetPassword';
   static const String logout = '/api/user/logout';
   static const String updateUser = '/api/user';
+  static const String getallusers = '/api/user/users';
   static const String changePassword = '/api/user/changePassword';
   static const String rate = '/api/rate';
+  static const String addProject = '/api/project';
 }
